@@ -1,9 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://dygb2wkkanw1i"]
+[gd_scene load_steps=3 format=3 uid="uid://dygb2wkkanw1i"]
 
 [ext_resource type="Script" path="res://Level/level.gd" id="1_k6lt7"]
+[ext_resource type="PackedScene" uid="uid://bdv2qatpoc5q7" path="res://Player/Player.tscn" id="2_2ef83"]
 
 [node name="Level" type="Node3D"]
 script = ExtResource("1_k6lt7")
+player_scene = ExtResource("2_2ef83")
 
 [node name="lblIP" type="Label" parent="."]
 offset_left = 8.0
