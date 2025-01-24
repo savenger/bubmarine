@@ -6,16 +6,16 @@ var peer = ENetMultiplayerPeer.new()
 var ip_adress :String
 
 func get_local_ip() -> String:
-	var ip = ""
 	for address in IP.get_local_addresses():
 		if "." in address and not address.begins_with("127.") and not address.begins_with("169.254."):
 			if address.begins_with("192.168.") or address.begins_with("10.") or (address.begins_with("172.") and int(address.split(".")[1]) >= 16 and int(address.split(".")[1]) <= 31):
-				return ip
+				return address
 	return "unknown"
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$lblIP.text = "Local IP address: " + get_local_ip()
+	print_debug(get_local_ip())
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
