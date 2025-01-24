@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://bdv2qatpoc5q7"]
+[gd_scene load_steps=4 format=3 uid="uid://bdv2qatpoc5q7"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_rmy15"]
+[ext_resource type="PackedScene" path="res://FBX/Submarine.fbx" id="2_y61dx"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_hi2mw"]
 properties/0/path = NodePath(".:position")
@@ -15,3 +16,6 @@ script = ExtResource("1_rmy15")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_hi2mw")
+
+[node name="Submarine" parent="." instance=ExtResource("2_y61dx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00937295, 0.0753896, 0.0375934)
