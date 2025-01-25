@@ -12,5 +12,9 @@ func _ready():
 func set_open(set_open: bool) -> void:
 	if _is_open == set_open: return
 	_is_open = set_open
-	var animation := "HatchClose" if !set_open else "HatchOpen"
-	animator.play(animation)
+	var reverse := true if !set_open else false
+	
+	if reverse:
+		animator.play_backwards("HatchOpen")
+	else:
+		animator.play("HatchOpen")
