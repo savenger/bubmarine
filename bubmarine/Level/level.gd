@@ -7,6 +7,8 @@ var peer = ENetMultiplayerPeer.new()
 @export var proc_gen: bool
 @onready var _menu = $lblIP
 
+var player_scores = {}
+
 var collectable = preload("res://Level/rock1.tscn")
 
 var ip_adress :String
@@ -72,7 +74,8 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("menu"):
 		pause()
 	
-	
+	if local_player:
+		$Position.text = str(local_player.global_transform.origin)
 
 func _on_btn_host_pressed() -> void:
 	peer.create_server(1234)
@@ -84,6 +87,13 @@ func _on_btn_join_pressed() -> void:
 	peer.create_client($txtJoin.text, 1234)
 	multiplayer.multiplayer_peer = peer
 
+func _on_collect(player_id):
+	print(player_id)
+	if not player_id in player_scores.keys():
+		player_scores[player_id] = 0
+	player_scores[player_id] += 1
+	$lblBubbles.text = str(player_scores)
+
 func _add_player(id = 1) -> void:
 	var player = player_scene.instantiate()
 	player.name = str(id)
@@ -93,3 +103,7 @@ func _add_player(id = 1) -> void:
 	player.add_child(cam)
 	if id == 1:
 		local_player = player
+		var bubble = preload("res://bubble/bubble.tscn").instantiate()
+		bubble.transform.origin.z -= 10
+		add_child(bubble)
+		player.connect("collected", _on_collect)

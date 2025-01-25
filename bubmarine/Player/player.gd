@@ -1,6 +1,8 @@
 extends RigidBody3D
 
-var move_speed = 1
+signal collected
+
+var move_speed = 1.2
 var turn_speed = 0.3
 var target_velocity = Vector3.ZERO
 var torque : int = 20
@@ -27,3 +29,9 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 		pass
 	state.apply_torque(rotation_direction * torque)
 	state.apply_force(global_basis.z * 100 * acc)
+
+func _on_area_3d_body_entered(body: Node3D) -> void:
+	if body.name == "BubbleCollision":
+		body.get_parent().hide()
+		body.get_parent().queue_free()
+		emit_signal("collected", multiplayer.get_unique_id())

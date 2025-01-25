@@ -1,35 +1,28 @@
 [gd_scene load_steps=5 format=3 uid="uid://nl1uiftrpq1y"]
 
 [ext_resource type="Shader" path="res://sphere.gdshader" id="1_5dj0x"]
-[ext_resource type="Script" path="res://bubble/lightRoam.gd" id="2_n43i8"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_uaphi"]
 render_priority = 0
 shader = ExtResource("1_5dj0x")
 shader_parameter/speed = 2.0
 shader_parameter/size = 0.06
-shader_parameter/outline_color = Color(0.0166605, 0.887297, 0.569012, 1)
-shader_parameter/target_color = Color(0.730922, 0.553142, 0.989613, 1)
+shader_parameter/outline_color = Color(0.0157, 0.851, 0.545, 1)
+shader_parameter/target_color = Color(0.592, 0.239, 0.949, 1)
 shader_parameter/outline_ratio = 1.0
 shader_parameter/noise_speed = 0.2
 shader_parameter/noise_scale = 0.5
 
 [sub_resource type="SphereMesh" id="SphereMesh_qrjcx"]
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_6pcjo"]
+
 [node name="Bubble" type="MeshInstance3D"]
 material_override = SubResource("ShaderMaterial_uaphi")
 mesh = SubResource("SphereMesh_qrjcx")
 
-[node name="Node3D" type="Node3D" parent="."]
-script = ExtResource("2_n43i8")
+[node name="BubbleCollision" type="StaticBody3D" parent="."]
+collision_layer = 3
 
-[node name="OmniLight3D" type="OmniLight3D" parent="Node3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.29874, 1.64548, 0)
-light_color = Color(0.640203, 0.35612, 0.973547, 1)
-light_energy = 8.0
-light_size = 1.0
-shadow_enabled = true
-shadow_bias = 0.5
-shadow_blur = 2.309
-distance_fade_enabled = true
-omni_range = 48.6438
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BubbleCollision"]
+shape = SubResource("SphereShape3D_6pcjo")
