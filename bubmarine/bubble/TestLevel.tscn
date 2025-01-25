@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://ii6aa3cmy0ao"]
+[gd_scene load_steps=5 format=3 uid="uid://ii6aa3cmy0ao"]
 
 [ext_resource type="PackedScene" uid="uid://bdv2qatpoc5q7" path="res://Player/Player.tscn" id="2_vmukh"]
 [ext_resource type="PackedScene" uid="uid://3dg7467qvwkl" path="res://bubble/HostileBubble.tscn" id="3_mqvda"]
 [ext_resource type="Script" path="res://camera/camera_follow.gd" id="3_nevc8"]
+[ext_resource type="PackedScene" uid="uid://cucm5xv1e1dv5" path="res://bubble/BulletShooter.tscn" id="3_vse87"]
 
 [node name="TestLevel" type="Node3D"]
 
@@ -14,6 +15,14 @@ script = ExtResource("3_nevc8")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0855675, -0.0511322, 7.18337)
 collision_layer = 5
 script = null
+
+[node name="BulletShooter" parent="Player" node_paths=PackedStringArray("world") instance=ExtResource("3_vse87")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.935025, 0, -1.33865)
+world = NodePath("../..")
+
+[node name="BulletShooter2" parent="Player" node_paths=PackedStringArray("world") instance=ExtResource("3_vse87")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.983919, 0, -1.33865)
+world = NodePath("../..")
 
 [node name="Node3D" type="Node3D" parent="."]
 
@@ -281,5 +290,275 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.0217, 0, -13.0805)
 pathfinding_targets = [NodePath("../../Player")]
 
 [node name="HostileBubble4" parent="Node3D9" node_paths=PackedStringArray("pathfinding_targets") instance=ExtResource("3_mqvda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.0795, 0, -6.76847)
+pathfinding_targets = [NodePath("../../Player")]
+
+[node name="Node3D10" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.80624, -3.8147e-06, -0.325977)
+
+[node name="HostileBubble" parent="Node3D10" node_paths=PackedStringArray("pathfinding_targets") instance=ExtResource("3_mqvda")]
+pathfinding_targets = [NodePath("../../Player")]
+
+[node name="HostileBubble5" parent="Node3D10" node_paths=PackedStringArray("pathfinding_targets") instance=ExtResource("3_mqvda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.267919, 0, -7.42765)
+pathfinding_targets = [NodePath("../../Player")]
+
+[node name="HostileBubble6" parent="Node3D10" node_paths=PackedStringArray("pathfinding_targets") instance=ExtResource("3_mqvda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0877419, 0.0578251, -19.0371)
+pathfinding_targets = [NodePath("../../Player")]
+
+[node name="HostileBubble7" parent="Node3D10" node_paths=PackedStringArray("pathfinding_targets") instance=ExtResource("3_mqvda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.180116, 0, -11.5474)
+pathfinding_targets = [NodePath("../../Player")]
+
+[node name="HostileBubble2" parent="Node3D10" node_paths=PackedStringArray("pathfinding_targets") instance=ExtResource("3_mqvda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.4276, 0, 4.60893)
+pathfinding_targets = [NodePath("../../Player")]
+
+[node name="HostileBubble3" parent="Node3D10" node_paths=PackedStringArray("pathfinding_targets") instance=ExtResource("3_mqvda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.0217, 0, -13.0805)
+pathfinding_targets = [NodePath("../../Player")]
+
+[node name="HostileBubble4" parent="Node3D10" node_paths=PackedStringArray("pathfinding_targets") instance=ExtResource("3_mqvda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.0795, 0, -6.76847)
+pathfinding_targets = [NodePath("../../Player")]
+
+[node name="Node3D11" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.5494, -3.8147e-06, -4.15604)
+
+[node name="HostileBubble" parent="Node3D11" node_paths=PackedStringArray("pathfinding_targets") instance=ExtResource("3_mqvda")]
+pathfinding_targets = [NodePath("../../Player")]
+
+[node name="HostileBubble5" parent="Node3D11" node_paths=PackedStringArray("pathfinding_targets") instance=ExtResource("3_mqvda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.267919, 0, -7.42765)
+pathfinding_targets = [NodePath("../../Player")]
+
+[node name="HostileBubble6" parent="Node3D11" node_paths=PackedStringArray("pathfinding_targets") instance=ExtResource("3_mqvda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0877419, 0.0578251, -19.0371)
+pathfinding_targets = [NodePath("../../Player")]
+
+[node name="HostileBubble7" parent="Node3D11" node_paths=PackedStringArray("pathfinding_targets") instance=ExtResource("3_mqvda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.180116, 0, -11.5474)
+pathfinding_targets = [NodePath("../../Player")]
+
+[node name="HostileBubble2" parent="Node3D11" node_paths=PackedStringArray("pathfinding_targets") instance=ExtResource("3_mqvda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.4276, 0, 4.60893)
+pathfinding_targets = [NodePath("../../Player")]
+
+[node name="HostileBubble3" parent="Node3D11" node_paths=PackedStringArray("pathfinding_targets") instance=ExtResource("3_mqvda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.0217, 0, -13.0805)
+pathfinding_targets = [NodePath("../../Player")]
+
+[node name="HostileBubble4" parent="Node3D11" node_paths=PackedStringArray("pathfinding_targets") instance=ExtResource("3_mqvda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.0795, 0, -6.76847)
+pathfinding_targets = [NodePath("../../Player")]
+
+[node name="Node3D12" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.38704, -3.8147e-06, -7.83858)
+
+[node name="HostileBubble" parent="Node3D12" node_paths=PackedStringArray("pathfinding_targets") instance=ExtResource("3_mqvda")]
+pathfinding_targets = [NodePath("../../Player")]
+
+[node name="HostileBubble5" parent="Node3D12" node_paths=PackedStringArray("pathfinding_targets") instance=ExtResource("3_mqvda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.267919, 0, -7.42765)
+pathfinding_targets = [NodePath("../../Player")]
+
+[node name="HostileBubble6" parent="Node3D12" node_paths=PackedStringArray("pathfinding_targets") instance=ExtResource("3_mqvda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0877419, 0.0578251, -19.0371)
+pathfinding_targets = [NodePath("../../Player")]
+
+[node name="HostileBubble7" parent="Node3D12" node_paths=PackedStringArray("pathfinding_targets") instance=ExtResource("3_mqvda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.180116, 0, -11.5474)
+pathfinding_targets = [NodePath("../../Player")]
+
+[node name="HostileBubble2" parent="Node3D12" node_paths=PackedStringArray("pathfinding_targets") instance=ExtResource("3_mqvda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.4276, 0, 4.60893)
+pathfinding_targets = [NodePath("../../Player")]
+
+[node name="HostileBubble3" parent="Node3D12" node_paths=PackedStringArray("pathfinding_targets") instance=ExtResource("3_mqvda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.0217, 0, -13.0805)
+pathfinding_targets = [NodePath("../../Player")]
+
+[node name="HostileBubble4" parent="Node3D12" node_paths=PackedStringArray("pathfinding_targets") instance=ExtResource("3_mqvda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.0795, 0, -6.76847)
+pathfinding_targets = [NodePath("../../Player")]
+
+[node name="Node3D13" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.2126, -3.8147e-06, -13.8148)
+
+[node name="HostileBubble" parent="Node3D13" node_paths=PackedStringArray("pathfinding_targets") instance=ExtResource("3_mqvda")]
+pathfinding_targets = [NodePath("../../Player")]
+
+[node name="HostileBubble5" parent="Node3D13" node_paths=PackedStringArray("pathfinding_targets") instance=ExtResource("3_mqvda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.267919, 0, -7.42765)
+pathfinding_targets = [NodePath("../../Player")]
+
+[node name="HostileBubble6" parent="Node3D13" node_paths=PackedStringArray("pathfinding_targets") instance=ExtResource("3_mqvda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0877419, 0.0578251, -19.0371)
+pathfinding_targets = [NodePath("../../Player")]
+
+[node name="HostileBubble7" parent="Node3D13" node_paths=PackedStringArray("pathfinding_targets") instance=ExtResource("3_mqvda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.180116, 0, -11.5474)
+pathfinding_targets = [NodePath("../../Player")]
+
+[node name="HostileBubble2" parent="Node3D13" node_paths=PackedStringArray("pathfinding_targets") instance=ExtResource("3_mqvda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.4276, 0, 4.60893)
+pathfinding_targets = [NodePath("../../Player")]
+
+[node name="HostileBubble3" parent="Node3D13" node_paths=PackedStringArray("pathfinding_targets") instance=ExtResource("3_mqvda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.0217, 0, -13.0805)
+pathfinding_targets = [NodePath("../../Player")]
+
+[node name="HostileBubble4" parent="Node3D13" node_paths=PackedStringArray("pathfinding_targets") instance=ExtResource("3_mqvda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.0795, 0, -6.76847)
+pathfinding_targets = [NodePath("../../Player")]
+
+[node name="Node3D14" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.3237, -3.8147e-06, 17.7199)
+
+[node name="HostileBubble" parent="Node3D14" node_paths=PackedStringArray("pathfinding_targets") instance=ExtResource("3_mqvda")]
+pathfinding_targets = [NodePath("../../Player")]
+
+[node name="HostileBubble5" parent="Node3D14" node_paths=PackedStringArray("pathfinding_targets") instance=ExtResource("3_mqvda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.267919, 0, -7.42765)
+pathfinding_targets = [NodePath("../../Player")]
+
+[node name="HostileBubble6" parent="Node3D14" node_paths=PackedStringArray("pathfinding_targets") instance=ExtResource("3_mqvda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0877419, 0.0578251, -19.0371)
+pathfinding_targets = [NodePath("../../Player")]
+
+[node name="HostileBubble7" parent="Node3D14" node_paths=PackedStringArray("pathfinding_targets") instance=ExtResource("3_mqvda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.180116, 0, -11.5474)
+pathfinding_targets = [NodePath("../../Player")]
+
+[node name="HostileBubble2" parent="Node3D14" node_paths=PackedStringArray("pathfinding_targets") instance=ExtResource("3_mqvda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.4276, 0, 4.60893)
+pathfinding_targets = [NodePath("../../Player")]
+
+[node name="HostileBubble3" parent="Node3D14" node_paths=PackedStringArray("pathfinding_targets") instance=ExtResource("3_mqvda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.0217, 0, -13.0805)
+pathfinding_targets = [NodePath("../../Player")]
+
+[node name="HostileBubble4" parent="Node3D14" node_paths=PackedStringArray("pathfinding_targets") instance=ExtResource("3_mqvda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.0795, 0, -6.76847)
+pathfinding_targets = [NodePath("../../Player")]
+
+[node name="Node3D15" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.55655, 2.72848e-12, 30.1952)
+
+[node name="HostileBubble" parent="Node3D15" node_paths=PackedStringArray("pathfinding_targets") instance=ExtResource("3_mqvda")]
+pathfinding_targets = [NodePath("../../Player")]
+
+[node name="HostileBubble5" parent="Node3D15" node_paths=PackedStringArray("pathfinding_targets") instance=ExtResource("3_mqvda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.267919, 0, -7.42765)
+pathfinding_targets = [NodePath("../../Player")]
+
+[node name="HostileBubble6" parent="Node3D15" node_paths=PackedStringArray("pathfinding_targets") instance=ExtResource("3_mqvda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0877419, 0.0578251, -19.0371)
+pathfinding_targets = [NodePath("../../Player")]
+
+[node name="HostileBubble7" parent="Node3D15" node_paths=PackedStringArray("pathfinding_targets") instance=ExtResource("3_mqvda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.180116, 0, -11.5474)
+pathfinding_targets = [NodePath("../../Player")]
+
+[node name="HostileBubble2" parent="Node3D15" node_paths=PackedStringArray("pathfinding_targets") instance=ExtResource("3_mqvda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.4276, 0, 4.60893)
+pathfinding_targets = [NodePath("../../Player")]
+
+[node name="HostileBubble3" parent="Node3D15" node_paths=PackedStringArray("pathfinding_targets") instance=ExtResource("3_mqvda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.0217, 0, -13.0805)
+pathfinding_targets = [NodePath("../../Player")]
+
+[node name="HostileBubble4" parent="Node3D15" node_paths=PackedStringArray("pathfinding_targets") instance=ExtResource("3_mqvda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.0795, 0, -6.76847)
+pathfinding_targets = [NodePath("../../Player")]
+
+[node name="Node3D16" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.496, 2.72848e-12, 39.5962)
+
+[node name="HostileBubble" parent="Node3D16" node_paths=PackedStringArray("pathfinding_targets") instance=ExtResource("3_mqvda")]
+pathfinding_targets = [NodePath("../../Player")]
+
+[node name="HostileBubble5" parent="Node3D16" node_paths=PackedStringArray("pathfinding_targets") instance=ExtResource("3_mqvda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.267919, 0, -7.42765)
+pathfinding_targets = [NodePath("../../Player")]
+
+[node name="HostileBubble6" parent="Node3D16" node_paths=PackedStringArray("pathfinding_targets") instance=ExtResource("3_mqvda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0877419, 0.0578251, -19.0371)
+pathfinding_targets = [NodePath("../../Player")]
+
+[node name="HostileBubble7" parent="Node3D16" node_paths=PackedStringArray("pathfinding_targets") instance=ExtResource("3_mqvda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.180116, 0, -11.5474)
+pathfinding_targets = [NodePath("../../Player")]
+
+[node name="HostileBubble2" parent="Node3D16" node_paths=PackedStringArray("pathfinding_targets") instance=ExtResource("3_mqvda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.4276, 0, 4.60893)
+pathfinding_targets = [NodePath("../../Player")]
+
+[node name="HostileBubble3" parent="Node3D16" node_paths=PackedStringArray("pathfinding_targets") instance=ExtResource("3_mqvda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.0217, 0, -13.0805)
+pathfinding_targets = [NodePath("../../Player")]
+
+[node name="HostileBubble4" parent="Node3D16" node_paths=PackedStringArray("pathfinding_targets") instance=ExtResource("3_mqvda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.0795, 0, -6.76847)
+pathfinding_targets = [NodePath("../../Player")]
+
+[node name="Node3D17" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.3042, 2.72848e-12, 32.9371)
+
+[node name="HostileBubble" parent="Node3D17" node_paths=PackedStringArray("pathfinding_targets") instance=ExtResource("3_mqvda")]
+pathfinding_targets = [NodePath("../../Player")]
+
+[node name="HostileBubble5" parent="Node3D17" node_paths=PackedStringArray("pathfinding_targets") instance=ExtResource("3_mqvda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.267919, 0, -7.42765)
+pathfinding_targets = [NodePath("../../Player")]
+
+[node name="HostileBubble6" parent="Node3D17" node_paths=PackedStringArray("pathfinding_targets") instance=ExtResource("3_mqvda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0877419, 0.0578251, -19.0371)
+pathfinding_targets = [NodePath("../../Player")]
+
+[node name="HostileBubble7" parent="Node3D17" node_paths=PackedStringArray("pathfinding_targets") instance=ExtResource("3_mqvda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.180116, 0, -11.5474)
+pathfinding_targets = [NodePath("../../Player")]
+
+[node name="HostileBubble2" parent="Node3D17" node_paths=PackedStringArray("pathfinding_targets") instance=ExtResource("3_mqvda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.4276, 0, 4.60893)
+pathfinding_targets = [NodePath("../../Player")]
+
+[node name="HostileBubble3" parent="Node3D17" node_paths=PackedStringArray("pathfinding_targets") instance=ExtResource("3_mqvda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.0217, 0, -13.0805)
+pathfinding_targets = [NodePath("../../Player")]
+
+[node name="HostileBubble4" parent="Node3D17" node_paths=PackedStringArray("pathfinding_targets") instance=ExtResource("3_mqvda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.0795, 0, -6.76847)
+pathfinding_targets = [NodePath("../../Player")]
+
+[node name="Node3D18" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.5318, 2.72848e-12, 14.3479)
+
+[node name="HostileBubble" parent="Node3D18" node_paths=PackedStringArray("pathfinding_targets") instance=ExtResource("3_mqvda")]
+pathfinding_targets = [NodePath("../../Player")]
+
+[node name="HostileBubble5" parent="Node3D18" node_paths=PackedStringArray("pathfinding_targets") instance=ExtResource("3_mqvda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.267919, 0, -7.42765)
+pathfinding_targets = [NodePath("../../Player")]
+
+[node name="HostileBubble6" parent="Node3D18" node_paths=PackedStringArray("pathfinding_targets") instance=ExtResource("3_mqvda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0877419, 0.0578251, -19.0371)
+pathfinding_targets = [NodePath("../../Player")]
+
+[node name="HostileBubble7" parent="Node3D18" node_paths=PackedStringArray("pathfinding_targets") instance=ExtResource("3_mqvda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.180116, 0, -11.5474)
+pathfinding_targets = [NodePath("../../Player")]
+
+[node name="HostileBubble2" parent="Node3D18" node_paths=PackedStringArray("pathfinding_targets") instance=ExtResource("3_mqvda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.4276, 0, 4.60893)
+pathfinding_targets = [NodePath("../../Player")]
+
+[node name="HostileBubble3" parent="Node3D18" node_paths=PackedStringArray("pathfinding_targets") instance=ExtResource("3_mqvda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.0217, 0, -13.0805)
+pathfinding_targets = [NodePath("../../Player")]
+
+[node name="HostileBubble4" parent="Node3D18" node_paths=PackedStringArray("pathfinding_targets") instance=ExtResource("3_mqvda")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.0795, 0, -6.76847)
 pathfinding_targets = [NodePath("../../Player")]
