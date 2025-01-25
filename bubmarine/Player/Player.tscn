@@ -192,13 +192,13 @@ light_energy = 10.005
 spot_range = 69.803
 spot_angle = 71.44
 
-[node name="BulletShooter" parent="." node_paths=PackedStringArray("world") instance=ExtResource("4_ucqq2")]
+[node name="BulletShooter" parent="." node_paths=PackedStringArray("player") instance=ExtResource("4_ucqq2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.98609, -0.0956977, -1.05213)
-world = NodePath("..")
+player = NodePath("..")
 
-[node name="BulletShooter2" parent="." node_paths=PackedStringArray("world") instance=ExtResource("4_ucqq2")]
+[node name="BulletShooter2" parent="." node_paths=PackedStringArray("player") instance=ExtResource("4_ucqq2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.986, -0.096, -1.052)
-world = NodePath("..")
+player = NodePath("..")
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
 
