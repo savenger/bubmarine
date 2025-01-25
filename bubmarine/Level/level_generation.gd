@@ -86,12 +86,6 @@ func get_random_tile(create_collectable: bool):
 				f.add_child(coral)
 				coral.transform.origin.x = x * LevelData.ROCK_SIZE
 				coral.transform.origin.z = y * LevelData.ROCK_SIZE
-				var space_state = get_parent().get_world_3d().direct_space_state
-				var raycast = PhysicsRayQueryParameters3D.create(coral.transform.origin, coral.transform.origin + Vector3(0, -100, 0))
-				var collision = space_state.intersect_ray(raycast)
-				if collision:
-					print("COLLISION")
-					print(collision.position)
 			else:
 				if create_collectable and not created_collectable:
 					var c = generate_collectable()
@@ -146,8 +140,8 @@ func generate_tiles_in_chunk(chunk_position):
 			LevelData.tile_count += 1
 			# print("generated %s th tile at %s, %s" % [str(LevelData.tile_count), str(t.global_transform.origin.x), str(t.global_transform.origin.z)])
 	# place tree between two random tiles
-	var rx = rng.randi() % LevelData.CHUNK_SIZE
-	var rz = rng.randi() % LevelData.CHUNK_SIZE
+	#var rx = rng.randi() % LevelData.CHUNK_SIZE
+	#var rz = rng.randi() % LevelData.CHUNK_SIZE
 	#var t = generate_tree()
 	#add_child(t)
 	#t.global_transform.origin.x = chunk_position.x * LevelData.CHUNK_SIZE * LevelData.TILE_SIZE + rx * LevelData.TILE_SIZE
