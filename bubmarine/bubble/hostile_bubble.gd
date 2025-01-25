@@ -1,3 +1,4 @@
+class_name HostileBubble
 extends RigidBody3D
 
 @export var pathfinding_targets: Array[Node3D]
