@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://dygb2wkkanw1i"]
+[gd_scene load_steps=8 format=3 uid="uid://dygb2wkkanw1i"]
 
 [ext_resource type="Script" path="res://Level/level.gd" id="1_k6lt7"]
 [ext_resource type="PackedScene" uid="uid://bdv2qatpoc5q7" path="res://Player/Player.tscn" id="2_2ef83"]
 [ext_resource type="Script" path="res://camera/camera_follow.gd" id="3_jkbsj"]
 [ext_resource type="Script" path="res://Level/level_generation.gd" id="3_qjyve"]
+[ext_resource type="PackedScene" uid="uid://cgc4gj0lln1f1" path="res://Level/coral1.tscn" id="5_qr765"]
 
 [sub_resource type="Environment" id="Environment_kwgv6"]
 ambient_light_color = Color(0.95158, 0.95158, 0.95158, 1)
@@ -74,6 +75,8 @@ offset_left = 1049.0
 offset_top = -1.0
 offset_right = 963.432
 offset_bottom = -31.136
+
+[node name="Coral" parent="." instance=ExtResource("5_qr765")]
 
 [connection signal="pressed" from="btnHost" to="." method="_on_btn_host_pressed"]
 [connection signal="pressed" from="btnJoin" to="." method="_on_btn_join_pressed"]

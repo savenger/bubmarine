@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bubjlpmwvsb1h"]
+
+[ext_resource type="PackedScene" uid="uid://7j8vbgxo8dyp" path="res://FBX/coral4.fbx" id="1_rhj05"]
+
+[node name="Coral4" type="Node3D"]
+
+[node name="coral4" parent="." instance=ExtResource("1_rhj05")]

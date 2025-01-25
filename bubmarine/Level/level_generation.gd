@@ -14,6 +14,14 @@ var rocks = [
 	preload("res://Level/rock3.tscn"),
 ]
 
+var corals = [
+	preload("res://Level/coral1.tscn"),
+	preload("res://Level/coral2.tscn"),
+	preload("res://Level/coral3.tscn"),
+	preload("res://Level/coral4.tscn"),
+	preload("res://Level/coral5.tscn"),
+]
+
 var arcs = [
 	preload("res://Level/arc.tscn"),
 ]
@@ -34,6 +42,11 @@ func _process(delta: float) -> void:
 func generate_arc():
 	var a : Node3D = arcs[randi() % len(arcs)].instantiate()
 	return a
+
+func generate_coral():
+	var c : Node3D = corals[randi() % len(corals)].instantiate()
+	c.rotate_y(randf())
+	return c
 
 func generate_rock():
 	var r : Node3D = rocks[randi() % len(rocks)].instantiate()
@@ -68,6 +81,17 @@ func get_random_tile(create_collectable: bool):
 				if not grid.has(rock.transform.origin.x):
 					grid[rock.transform.origin.x] = []
 				grid[rock.transform.origin.x].append(rock.transform.origin.z)
+			elif randf() < 0.2:
+				var coral = generate_coral()
+				f.add_child(coral)
+				coral.transform.origin.x = x * LevelData.ROCK_SIZE
+				coral.transform.origin.z = y * LevelData.ROCK_SIZE
+				var space_state = get_parent().get_world_3d().direct_space_state
+				var raycast = PhysicsRayQueryParameters3D.create(coral.transform.origin, coral.transform.origin + Vector3(0, -100, 0))
+				var collision = space_state.intersect_ray(raycast)
+				if collision:
+					print("COLLISION")
+					print(collision.position)
 			else:
 				if create_collectable and not created_collectable:
 					var c = generate_collectable()
