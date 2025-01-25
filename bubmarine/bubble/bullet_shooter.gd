@@ -1,3 +1,4 @@
+class_name bullet_shooter
 extends Node3D
 
 @export var world: Node3D 
@@ -20,11 +21,11 @@ func _process(delta: float) -> void:
 		can_shoot = false
 		$Timer.start(cooldown)
 		var new_bullet = bullet.instantiate()
+		world.get_parent().add_child(new_bullet)
 		new_bullet.global_position = self.global_position
 		new_bullet.bullet_direction = $Marker3D.global_position - self.global_position
 		new_bullet.bullet_inflation = bullet_inflation
 		new_bullet.bullet_speed = bullet_speed
-		world.add_child(new_bullet)
 
 
 
