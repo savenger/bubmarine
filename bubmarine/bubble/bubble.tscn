@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://nl1uiftrpq1y"]
+[gd_scene load_steps=5 format=3 uid="uid://nl1uiftrpq1y"]
 
 [ext_resource type="Shader" path="res://sphere.gdshader" id="1_5dj0x"]
 
@@ -15,6 +15,14 @@ shader_parameter/noise_scale = 0.5
 
 [sub_resource type="SphereMesh" id="SphereMesh_qrjcx"]
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_6pcjo"]
+
 [node name="Bubble" type="MeshInstance3D"]
 material_override = SubResource("ShaderMaterial_uaphi")
 mesh = SubResource("SphereMesh_qrjcx")
+
+[node name="BubbleCollision" type="StaticBody3D" parent="."]
+collision_layer = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BubbleCollision"]
+shape = SubResource("SphereShape3D_6pcjo")

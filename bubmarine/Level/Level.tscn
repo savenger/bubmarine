@@ -62,5 +62,18 @@ replication_config = SubResource("SceneReplicationConfig_an1ul")
 
 [node name="static" type="Node" parent="."]
 
+[node name="Position" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="lblBubbles" type="Label" parent="."]
+anchors_preset = -1
+anchor_right = 0.109
+anchor_bottom = 0.082
+offset_left = 1049.0
+offset_top = -1.0
+offset_right = 963.432
+offset_bottom = -31.136
+
 [connection signal="pressed" from="btnHost" to="." method="_on_btn_host_pressed"]
 [connection signal="pressed" from="btnJoin" to="." method="_on_btn_join_pressed"]
