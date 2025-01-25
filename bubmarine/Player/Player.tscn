@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://bdv2qatpoc5q7"]
+[gd_scene load_steps=6 format=3 uid="uid://bdv2qatpoc5q7"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_rmy15"]
 [ext_resource type="PackedScene" uid="uid://u10pdfqs1ig0" path="res://FBX/Submarine.fbx" id="2_y61dx"]
@@ -15,6 +15,9 @@ properties/1/replication_mode = 1
 radius = 0.805
 height = 3.622
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_3cfpm"]
+size = Vector3(1, 0.5, 1)
+
 [node name="Player" type="RigidBody3D"]
 axis_lock_linear_y = true
 axis_lock_angular_x = true
@@ -28,7 +31,17 @@ replication_config = SubResource("SceneReplicationConfig_hi2mw")
 [node name="Submarine" parent="." instance=ExtResource("2_y61dx")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -0.0223907, 0.999749, 0, -0.999749, -0.0223907, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, -0.0223907, 0.999749, 0, -0.999749, -0.0223907, 0, 0, 1.42379)
 shape = SubResource("CapsuleShape3D_f4uxr")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0934166)
+shape = SubResource("BoxShape3D_3cfpm")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
 
 [editable path="Submarine"]
