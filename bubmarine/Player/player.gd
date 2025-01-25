@@ -1,30 +1,41 @@
 extends CharacterBody3D
 
-
-const SPEED = 5.0
-const JUMP_VELOCITY = 4.5
+var move_speed = 2
+var turn_speed = 0.3
+var target_velocity = Vector3.ZERO
 
 func _enter_tree():
 	set_multiplayer_authority(name.to_int())
 
-func _physics_process(delta: float) -> void:
-	# Add the gravity.
-	if not is_on_floor():
-		velocity += get_gravity() * delta
-
-	# Handle jump.
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
-
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	var input_dir := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-	if direction:
-		velocity.x = direction.x * SPEED
-		velocity.z = direction.z * SPEED
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-		velocity.z = move_toward(velocity.z, 0, SPEED)
-
-	move_and_slide()
+func _physics_process(delta):
+	
+	var direction = Vector3.ZERO
+	
+	if Input.is_action_pressed("move_forward"):
+		direction.z -= 1
+	if Input.is_action_pressed("move_back"):
+		direction.z += 1
+		
+	var turn_input = 0.0
+	
+	if Input.is_action_pressed("move_right"):
+		turn_input += 1
+	if Input.is_action_pressed("move_left"):
+		turn_input -= 1
+	
+	turn_input += Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
+	
+	if direction != Vector3.ZERO:
+		direction = direction.normalized()
+		#$Pivot.basis = Basis.looking_at(direction)
+		
+	target_velocity.x = direction.x * move_speed
+	target_velocity.z = direction.z * move_speed
+	
+	if abs(turn_input) < 0.1:
+		turn_input = 0
+		
+	rotation.y -= turn_input * turn_speed * delta
+	
+	velocity = target_velocity.rotated(Vector3.UP, rotation.y)
+	move_and_slide() 	

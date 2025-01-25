@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dygb2wkkanw1i"]
+[gd_scene load_steps=6 format=3 uid="uid://dygb2wkkanw1i"]
 
 [ext_resource type="Script" path="res://Level/level.gd" id="1_k6lt7"]
 [ext_resource type="PackedScene" uid="uid://bdv2qatpoc5q7" path="res://Player/Player.tscn" id="2_2ef83"]
+[ext_resource type="Script" path="res://camera/camera_follow.gd" id="3_jkbsj"]
 [ext_resource type="Script" path="res://Level/level_generation.gd" id="3_qjyve"]
 
 [sub_resource type="Environment" id="Environment_kwgv6"]
@@ -45,6 +46,7 @@ spawn_path = NodePath("..")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.0993019, 0.995057, 0, -0.995057, 0.0993019, 0, 19.3669, 0.396319)
+script = ExtResource("3_jkbsj")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_kwgv6")
