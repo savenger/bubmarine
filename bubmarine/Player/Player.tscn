@@ -24,10 +24,10 @@ axis_lock_angular_x = true
 axis_lock_angular_z = true
 mass = 5.0
 gravity_scale = 0.0
-linear_damp = 5.455
+linear_damp = 4.0
 angular_damp = 1.0
 script = ExtResource("1_rmy15")
-torque = 85
+torque = 90
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_hi2mw")
