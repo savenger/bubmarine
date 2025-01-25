@@ -15,7 +15,11 @@ properties/1/replication_mode = 1
 radius = 0.805
 height = 3.622
 
-[node name="Player" type="CharacterBody3D"]
+[node name="Player" type="RigidBody3D"]
+axis_lock_linear_y = true
+axis_lock_angular_x = true
+axis_lock_angular_z = true
+gravity_scale = 0.0
 script = ExtResource("1_rmy15")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
@@ -26,3 +30,5 @@ replication_config = SubResource("SceneReplicationConfig_hi2mw")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -0.0223907, 0.999749, 0, -0.999749, -0.0223907, 0, 0, 0)
 shape = SubResource("CapsuleShape3D_f4uxr")
+
+[editable path="Submarine"]
