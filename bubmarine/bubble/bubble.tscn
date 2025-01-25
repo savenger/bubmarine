@@ -34,7 +34,7 @@ script = ExtResource("2_n43i8")
 [node name="OmniLight3D" type="OmniLight3D" parent="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.29874, 1.64548, 0)
 light_color = Color(0.640203, 0.35612, 0.973547, 1)
-light_energy = 8.0
+light_energy = 15.607
 light_size = 1.0
 shadow_enabled = true
 shadow_bias = 0.5
