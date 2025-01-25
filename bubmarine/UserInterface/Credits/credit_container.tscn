@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://bf84ubyoot6ri"]
+
+[node name="CreditContainer" type="HBoxContainer"]
+custom_minimum_size = Vector2(300, 0)
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -11.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 2
+size_flags_vertical = 0
+text = "3D Visuals"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 10
+
+[node name="CrediteeLink" type="LinkButton" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Jonas Mumm"
+uri = "https://jonasmumm.itch.io"
+
+[connection signal="pressed" from="VBoxContainer/CrediteeLink" to="VBoxContainer/CrediteeLink" method="_on_pressed"]
