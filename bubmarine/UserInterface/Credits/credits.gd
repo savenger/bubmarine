@@ -12,8 +12,10 @@ func _process(delta: float) -> void:
 
 
 func _on_back_button_pressed() -> void:
+	print("CREDITS")
 	visible = false
 
 
 func _on_credits_button_pressed() -> void:
+	print("CREDITS")
 	visible = true
