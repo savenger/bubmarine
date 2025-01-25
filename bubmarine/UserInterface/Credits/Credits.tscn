@@ -72,7 +72,7 @@ layout_mode = 2
 text = "2D Visuals"
 
 [node name="CrediteeLink" parent="VBoxContainer/CreditContainer3/VBoxContainer" index="0"]
-text = "Falk"
+text = "Meinobot2"
 uri = ""
 
 [node name="CreditContainer4" parent="VBoxContainer" instance=ExtResource("3_u4oqm")]

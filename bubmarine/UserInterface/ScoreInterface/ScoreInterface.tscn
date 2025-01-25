@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=3 uid="uid://d1ldig75dmv8f"]
+[gd_scene load_steps=10 format=3 uid="uid://d1ldig75dmv8f"]
 
 [ext_resource type="Theme" uid="uid://d1m6om37o1rcl" path="res://UserInterface/menu_theme.tres" id="1_dsu0m"]
+[ext_resource type="Script" path="res://UserInterface/ScoreInterface/score_interface.gd" id="2_5bp3s"]
 [ext_resource type="Script" path="res://UserInterface/ScoreInterface/hp_bar.gd" id="2_vh63b"]
 [ext_resource type="Script" path="res://UserInterface/ScoreInterface/game_time.gd" id="3_ijrvh"]
 
@@ -14,13 +15,14 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s4ag7"]
 
-[node name="PanelContainer" type="PanelContainer"]
+[node name="ScoreInterface" type="PanelContainer"]
 anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 41.0
 grow_horizontal = 2
 size_flags_vertical = 0
 theme = ExtResource("1_dsu0m")
+script = ExtResource("2_5bp3s")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
@@ -68,3 +70,4 @@ theme_override_styles/normal = SubResource("StyleBoxEmpty_s4ag7")
 text = "⏸"
 
 [connection signal="timeout" from="MarginContainer/HBoxContainer/GameTime/Timer" to="MarginContainer/HBoxContainer/GameTime" method="_on_timer_timeout"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/PauseButton" to="." method="_on_pause_button_pressed"]

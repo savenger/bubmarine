@@ -2651,7 +2651,7 @@ axis_stretch_vertical = 1
 region_rect = Rect2(0, 0, 32, 32)
 modulate_color = Color(1, 0.741176, 0.741176, 1)
 
-[sub_resource type="Image" id="Image_qoff2"]
+[sub_resource type="Image" id="Image_ynh8k"]
 data = {
 "data": PackedByteArray("////AP///0D///9A////AP///wD///9A////QP///wD///8A////QP///0D///8A////AP///0D///9A////AP///wD///9A////QP///wD///8A////QP///0D///8A////AP///0D///9A////AP///wD///9A////QP///wD///8A////QP///0D///8A////AP///0D///9A////AP///wD///9A////QP///wD///8A////QP///0D///8A////AP///0D///9A////AP///wD///9A////QP///wD///8A////QP///0D///8A////AP///0D///9A////AA=="),
 "format": "RGBA8",
@@ -2661,29 +2661,34 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id="ImageTexture_kfug2"]
-image = SubResource("Image_qoff2")
+image = SubResource("Image_ynh8k")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_621kt"]
 texture = ExtResource("3_od4dv")
-texture_margin_left = 4.0
-texture_margin_top = 7.0
-texture_margin_bottom = 7.0
-region_rect = Rect2(3, 0, 22, 32)
-modulate_color = Color(0.5575, 0.55, 1, 1)
+texture_margin_left = 14.0
+texture_margin_top = 14.0
+texture_margin_bottom = 13.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+region_rect = Rect2(0, 0, 51, 64)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_be77m"]
 texture = ExtResource("3_od4dv")
-texture_margin_left = 4.0
-texture_margin_top = 7.0
-texture_margin_bottom = 7.0
-region_rect = Rect2(3, 0, 22, 32)
+texture_margin_left = 14.0
+texture_margin_top = 14.0
+texture_margin_bottom = 13.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+region_rect = Rect2(0, 0, 51, 64)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_buvpw"]
 texture = ExtResource("2_im06d")
-texture_margin_left = 4.0
-texture_margin_top = 4.0
-texture_margin_right = 4.0
-texture_margin_bottom = 4.0
+texture_margin_left = 15.0
+texture_margin_top = 15.0
+texture_margin_right = 14.0
+texture_margin_bottom = 14.0
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_p2s0g"]
 texture = ExtResource("1_p0ws7")
@@ -2696,21 +2701,21 @@ region_rect = Rect2(0, 9, 32, 23)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_yiv88"]
 texture = ExtResource("2_im06d")
-texture_margin_left = 5.0
-texture_margin_top = 5.0
-texture_margin_right = 5.0
-texture_margin_bottom = 5.0
-region_rect = Rect2(0, 0, 32, 32)
+texture_margin_left = 14.0
+texture_margin_top = 14.0
+texture_margin_right = 13.0
+texture_margin_bottom = 13.0
+region_rect = Rect2(0, 0, 64, 64)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gcm2m"]
 texture = ExtResource("3_od4dv")
-texture_margin_left = 7.0
-texture_margin_top = 7.0
-texture_margin_right = 7.0
-texture_margin_bottom = 7.0
+texture_margin_left = 14.0
+texture_margin_top = 14.0
+texture_margin_right = 13.0
+texture_margin_bottom = 13.0
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
-region_rect = Rect2(0, 0, 32, 32)
+region_rect = Rect2(0, 0, 64, 64)
 
 [resource]
 default_font_size = 32
@@ -2740,7 +2745,7 @@ Button/styles/normal = SubResource("StyleBoxTexture_a8px8")
 Button/styles/pressed = SubResource("StyleBoxTexture_7ch52")
 HBoxContainer/constants/separation = 50
 HSlider/constants/center_grabber = 0
-HSlider/constants/grabber_offset = 0
+HSlider/constants/grabber_offset = 2
 HSlider/icons/grabber = ExtResource("2_i1odj")
 HSlider/icons/grabber_disabled = ExtResource("2_i1odj")
 HSlider/icons/grabber_highlight = ExtResource("2_i1odj")
@@ -2760,4 +2765,4 @@ ProgressBar/font_sizes/font_size = 16
 ProgressBar/fonts/font = SubResource("FontFile_fvrob")
 ProgressBar/styles/background = SubResource("StyleBoxTexture_yiv88")
 ProgressBar/styles/fill = SubResource("StyleBoxTexture_gcm2m")
-VBoxContainer/constants/separation = 4
+VBoxContainer/constants/separation = 6
