@@ -19,7 +19,7 @@ void vertex( )
 void fragment()
 {	
 	METALLIC = 0.1;
-	ROUGHNESS = 0.1;
+	ROUGHNESS = 0.01;
 	
 	float outline_alpha = clamp( ( 1.0 - dot( NORMAL, VIEW ) ) * outline_ratio, 0.0, 1.0 );
 	vec3 tc = vec3(target_color.x,target_color.y,target_color.z);
