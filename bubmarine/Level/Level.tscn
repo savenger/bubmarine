@@ -8,6 +8,7 @@
 ambient_light_color = Color(0.95158, 0.95158, 0.95158, 1)
 
 [node name="Level" type="Node3D"]
+process_mode = 3
 script = ExtResource("1_k6lt7")
 player_scene = ExtResource("2_2ef83")
 
@@ -43,7 +44,7 @@ _spawnable_scenes = PackedStringArray("res://Player/Player.tscn")
 spawn_path = NodePath("..")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.487981, 0.872854, 0, -0.872854, 0.487981, 0, 5.4136, 2.1898)
+transform = Transform3D(1, 0, 0, 0, 0.0993019, 0.995057, 0, -0.995057, 0.0993019, 0, 19.3669, 0.396319)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_kwgv6")
