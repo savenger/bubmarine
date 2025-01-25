@@ -1,8 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://btv7hlhy7qq06"]
+[gd_scene load_steps=3 format=3 uid="uid://btv7hlhy7qq06"]
 
 [ext_resource type="PackedScene" uid="uid://cihh7uk7sif3y" path="res://FBX/coral2.fbx" id="1_qk7n1"]
+[ext_resource type="Script" path="res://Level/coral.gd" id="1_unpxs"]
 
 [node name="Coral2" type="Node3D"]
+script = ExtResource("1_unpxs")
 
 [node name="coral2" parent="." instance=ExtResource("1_qk7n1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.205808, 0)
+
+[connection signal="tree_entered" from="." to="." method="_on_tree_entered"]

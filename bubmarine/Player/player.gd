@@ -1,5 +1,7 @@
 extends RigidBody3D
 
+signal collected
+
 @export var move_speed = 1.0
 @export var turn_speed = 0.3
 @export var torque : int = 50
@@ -13,9 +15,6 @@ func _enter_tree():
 
 func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 	var rotation_direction : Vector3 = Vector3(0, 0, 0)
-	if Input.is_action_just_pressed("horn"):
-		if !$AudioHorn.playing:
-			$AudioHorn.play()
 	if Input.is_action_pressed("move_right"):
 		rotation_direction.y -= turn_speed
 	if Input.is_action_pressed("move_left"):
@@ -39,4 +38,10 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 
 func _process(delta:float):
 	hatch_controller.set_open(Input.is_action_pressed("open_hatch"))
-	
+
+
+func _on_area_3d_body_entered(body: Node3D) -> void:
+	if body.name == "BubbleCollision":
+		emit_signal("collected", multiplayer.get_unique_id())
+		body.get_parent().hide()
+		body.get_parent().queue_free()
