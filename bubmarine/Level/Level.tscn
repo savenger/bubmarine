@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dygb2wkkanw1i"]
+[gd_scene load_steps=7 format=3 uid="uid://dygb2wkkanw1i"]
 
 [ext_resource type="Script" path="res://Level/level.gd" id="1_k6lt7"]
 [ext_resource type="PackedScene" uid="uid://bdv2qatpoc5q7" path="res://Player/Player.tscn" id="2_2ef83"]
@@ -8,10 +8,13 @@
 [sub_resource type="Environment" id="Environment_kwgv6"]
 ambient_light_color = Color(0.95158, 0.95158, 0.95158, 1)
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_an1ul"]
+
 [node name="Level" type="Node3D"]
 process_mode = 3
 script = ExtResource("1_k6lt7")
 player_scene = ExtResource("2_2ef83")
+proc_gen = true
 
 [node name="lblIP" type="Label" parent="."]
 offset_left = 8.0
@@ -53,6 +56,11 @@ environment = SubResource("Environment_kwgv6")
 
 [node name="level_generator" type="Node" parent="."]
 script = ExtResource("3_qjyve")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_an1ul")
+
+[node name="static" type="Node" parent="."]
 
 [connection signal="pressed" from="btnHost" to="." method="_on_btn_host_pressed"]
 [connection signal="pressed" from="btnJoin" to="." method="_on_btn_join_pressed"]

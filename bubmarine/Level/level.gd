@@ -4,6 +4,7 @@ var current_player_chunk_pos: Vector2
 var local_player: Node
 var peer = ENetMultiplayerPeer.new()
 @export var player_scene: PackedScene
+@export var proc_gen: bool
 @onready var _menu = $lblIP
 
 var collectable = preload("res://Level/rock1.tscn")
@@ -23,6 +24,8 @@ func _ready() -> void:
 	current_player_chunk_pos.y = -1000
 	$lblIP.text = "Local IP address: " + get_local_ip()
 	print_debug(get_local_ip())
+	if proc_gen:
+		remove_child(get_node("static"))
 
 func pos_to_chunk_pos(position):
 	var x = floor(position.x / (LevelData.CHUNK_SIZE * LevelData.TILE_SIZE))
@@ -54,7 +57,7 @@ func pause():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if local_player:
+	if local_player and proc_gen:
 		var chunk_pos: Vector2 = pos_to_chunk_pos(local_player.global_transform.origin)
 		if chunk_pos.x != current_player_chunk_pos.x or chunk_pos.y != current_player_chunk_pos.y:
 			current_player_chunk_pos = chunk_pos
