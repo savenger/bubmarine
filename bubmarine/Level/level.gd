@@ -35,4 +35,6 @@ func _add_player(id = 1) -> void:
 	var player = player_scene.instantiate()
 	player.name = str(id)
 	call_deferred("add_child", player)
-	player.add_child($Camera3D)
+	var cam = get_node("Camera3D")
+	remove_child(cam)
+	player.add_child(cam)
