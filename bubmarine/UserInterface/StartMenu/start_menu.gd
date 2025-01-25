@@ -7,8 +7,11 @@ var peer = ENetMultiplayerPeer.new()
 
 @onready var menu_container = $StartMenu
 
+var game_level: Node3D
+
 var current_menu_mode = "MainMenu"
 var replacement_menu_mode = "PauseMenu"
+
 
 var ip_adress :String
 
@@ -21,6 +24,7 @@ func get_local_ip() -> String:
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	reset_gamestate()
 	$lblIP.text = "Local IP address: " + get_local_ip()
 	print_debug(get_local_ip())
 	_switch_menu_mode("MainMenu")
@@ -31,23 +35,32 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	pass
 
+
+func reset_gamestate() -> void:
+	if game_level:
+		game_level.queue_free()
+	var level = load(start_level)
+	game_level = level.instantiate()
+	add_child(game_level)
+
+
+func back_to_menu() -> void:
+	_switch_menu_mode("MainMenu")
+	menu_container.visible = true
+
+
 func _on_start_button_pressed() -> void:
-	peer.create_server(34)
-	multiplayer.multiplayer_peer = peer
-	multiplayer.peer_connected.connect(_start_game)
 	_start_game()
+	game_level.start_hosting()
 
 
 func _on_join_button_pressed() -> void:
-	peer.create_client(ip_field.text, 1234)
-	multiplayer.multiplayer_peer = peer
+	$Level.join_game(ip_field.text)
 
 
 func _start_game() -> void:
 	_switch_menu_mode()
 	menu_container.visible = false
-	var level = load(start_level).instantiate()
-	get_tree().root.add_child(level)
 	
 	
 func _switch_menu_mode(new_mode: String = replacement_menu_mode) -> String:
@@ -65,14 +78,10 @@ func _switch_menu_mode(new_mode: String = replacement_menu_mode) -> String:
 
 
 func _on_back_to_menu_button_pressed() -> void:
-	_switch_menu_mode("MainMenu")
+	menu_container.visible = false
+	$GameOverScreen.visible = true
+	
 
 
 func _on_continue_button_pressed() -> void:
 	menu_container.visible = false
-	
-	
-
-
-func _on_credits_button_pressed() -> void:
-	pass # Replace with function body.

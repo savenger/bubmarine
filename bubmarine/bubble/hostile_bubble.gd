@@ -66,7 +66,6 @@ func _find_closest_target() -> Node3D:
 
 
 func _on_player_contact(body: Node3D) -> void:
-	print(body)
 	visible = false
 	queue_free()
 

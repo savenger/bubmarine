@@ -77,15 +77,21 @@ func _process(delta: float) -> void:
 	if local_player:
 		$Position.text = str(local_player.global_transform.origin)
 
-func _on_btn_host_pressed() -> void:
+func start_hosting() -> void:
 	peer.create_server(1234)
 	multiplayer.multiplayer_peer = peer
 	multiplayer.peer_connected.connect(_add_player)
 	_add_player()
+	
+func join_game(ip_text: String) -> void:
+	peer.create_client(ip_text, 1234)
+	multiplayer.multiplayer_peer = peer
+
+func _on_btn_host_pressed() -> void:
+	start_hosting()
 
 func _on_btn_join_pressed() -> void:
-	peer.create_client($txtJoin.text, 1234)
-	multiplayer.multiplayer_peer = peer
+	join_game($txtJoin.text)
 
 func _on_collect(player_id):
 	print(player_id)
