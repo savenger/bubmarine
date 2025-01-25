@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cgc4gj0lln1f1"]
+
+[ext_resource type="Script" path="res://Level/coral.gd" id="1_r3xje"]
+[ext_resource type="PackedScene" uid="uid://banaef4mjn4v4" path="res://FBX/coral.fbx" id="1_vc66a"]
+
+[node name="Coral" type="Node3D"]
+script = ExtResource("1_r3xje")
+
+[node name="coral" parent="." instance=ExtResource("1_vc66a")]
+
+[connection signal="tree_entered" from="." to="." method="_on_tree_entered"]
