@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://tl2ll2kwndhe"]
+
+[ext_resource type="PackedScene" uid="uid://c13h1gjla6iqj" path="res://FBX/Rock1Round.fbx" id="1_41xhc"]
+
+[node name="Rock1" type="Node3D"]
+
+[node name="Rock1Round" parent="." instance=ExtResource("1_41xhc")]
