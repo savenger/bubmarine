@@ -1,9 +1,10 @@
 extends RigidBody3D
 
-var move_speed = 1
-var turn_speed = 0.3
-var target_velocity = Vector3.ZERO
+@export var move_speed = 1.0
+@export var turn_speed = 0.3
 @export var torque : int = 50
+@export var hatch_controller : player_hatch
+@export var hatch_speedfactor : float
 var acc : float = 0.0
 
 func _enter_tree():
@@ -28,4 +29,9 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 		
 		
 	state.apply_torque(rotation_direction * torque)
-	state.apply_force(global_basis.z * 100 * acc)
+	acc *= hatch_speedfactor if hatch_controller._is_open else 1
+	state.apply_force(-global_basis.z * 100 * acc)
+
+func _process(delta:float):
+	hatch_controller.set_open(Input.is_action_pressed("open_hatch"))
+	

@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://bdv2qatpoc5q7"]
+[gd_scene load_steps=11 format=3 uid="uid://bdv2qatpoc5q7"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_rmy15"]
 [ext_resource type="PackedScene" uid="uid://u10pdfqs1ig0" path="res://FBX/Submarine.fbx" id="2_y61dx"]
+[ext_resource type="Script" path="res://Player/player_hatch.gd" id="3_nsoj8"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_hi2mw"]
 properties/0/path = NodePath(".:position")
@@ -20,32 +21,30 @@ size = Vector3(1, 0.5, 1)
 
 [sub_resource type="Animation" id="Animation_7lt0d"]
 resource_name = "HatchClose"
-loop_mode = 2
 tracks/0/type = "rotation_3d"
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/path = NodePath("Submarine/SubmarineHatchJaw")
 tracks/0/interp = 1
-tracks/0/loop_wrap = true
+tracks/0/loop_wrap = false
 tracks/0/keys = PackedFloat32Array(0, 1, 0.708, 0, 0, 0.706, 1, 1, -0.707, 0, 0, 0.707)
 tracks/1/type = "rotation_3d"
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/path = NodePath("Submarine/SubmarineHatchL")
 tracks/1/interp = 1
-tracks/1/loop_wrap = true
+tracks/1/loop_wrap = false
 tracks/1/keys = PackedFloat32Array(0, 1, 0, 0.707, -0.707, 0, 1, 1, 0.707, 0, 0, 0.707)
 tracks/2/type = "rotation_3d"
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/path = NodePath("Submarine/SubmarineHatchR")
 tracks/2/interp = 1
-tracks/2/loop_wrap = true
+tracks/2/loop_wrap = false
 tracks/2/keys = PackedFloat32Array(0, 1, -0.001, -0.707, -0.707, 0.001, 1, 1, -0.707, 0, 0, 0.707)
 
 [sub_resource type="Animation" id="Animation_akovk"]
 resource_name = "HatchOpen"
-loop_mode = 2
 tracks/0/type = "rotation_3d"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -99,16 +98,19 @@ _data = {
 "RESET": SubResource("Animation_x4gn7")
 }
 
-[node name="Player" type="RigidBody3D"]
+[node name="Player" type="RigidBody3D" node_paths=PackedStringArray("hatch_controller")]
 axis_lock_linear_y = true
 axis_lock_angular_x = true
 axis_lock_angular_z = true
 mass = 5.0
 gravity_scale = 0.0
-linear_damp = 5.455
+linear_damp = 3.14
 angular_damp = 1.0
 script = ExtResource("1_rmy15")
+move_speed = 1.4
 torque = 85
+hatch_controller = NodePath("AnimationPlayer/PLayerHatchController")
+hatch_speedfactor = 0.5
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_hi2mw")
@@ -140,6 +142,10 @@ shape = SubResource("BoxShape3D_3cfpm")
 libraries = {
 "": SubResource("AnimationLibrary_vw6ve")
 }
+
+[node name="PLayerHatchController" type="Node" parent="AnimationPlayer" node_paths=PackedStringArray("animator")]
+script = ExtResource("3_nsoj8")
+animator = NodePath("..")
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
 
