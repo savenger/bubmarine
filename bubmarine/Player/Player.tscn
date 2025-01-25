@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://bdv2qatpoc5q7"]
+[gd_scene load_steps=13 format=3 uid="uid://bdv2qatpoc5q7"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_rmy15"]
 [ext_resource type="PackedScene" uid="uid://u10pdfqs1ig0" path="res://FBX/Submarine.fbx" id="2_y61dx"]
 [ext_resource type="Script" path="res://Player/player_hatch.gd" id="3_nsoj8"]
+[ext_resource type="PackedScene" uid="uid://cr4oyh6uulm1n" path="res://bubble/BulletShooter.tscn" id="4_ucqq2"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_hi2mw"]
 properties/0/path = NodePath(".:position")
@@ -190,6 +191,14 @@ transform = Transform3D(1, 0, 0, 0, 0.419135, 0.907924, 0, -0.907924, 0.419135, 
 light_energy = 10.005
 spot_range = 69.803
 spot_angle = 71.44
+
+[node name="BulletShooter" parent="." node_paths=PackedStringArray("player") instance=ExtResource("4_ucqq2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.98609, -0.0956977, -1.05213)
+player = NodePath("..")
+
+[node name="BulletShooter2" parent="." node_paths=PackedStringArray("player") instance=ExtResource("4_ucqq2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.986, -0.096, -1.052)
+player = NodePath("..")
 
 [connection signal="ready" from="." to="." method="_on_ready"]
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

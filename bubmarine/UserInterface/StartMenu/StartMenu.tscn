@@ -6,7 +6,7 @@
 [ext_resource type="Script" path="res://UserInterface/StartMenu/quit_button.gd" id="4_pu0j4"]
 [ext_resource type="PackedScene" uid="uid://cccdnswk50f2h" path="res://UserInterface/Credits/Credits.tscn" id="4_rxrfr"]
 [ext_resource type="PackedScene" uid="uid://d1ldig75dmv8f" path="res://UserInterface/ScoreInterface/ScoreInterface.tscn" id="6_vxgfb"]
-[ext_resource type="PackedScene" path="res://UserInterface/ScoreInterface/GameOverScreen.tscn" id="7_dd0po"]
+[ext_resource type="PackedScene" uid="uid://cmngnt7byyxkr" path="res://UserInterface/ScoreInterface/GameOverScreen.tscn" id="7_dd0po"]
 
 [node name="MainMenu" type="Control" node_paths=PackedStringArray("ip_field")]
 layout_mode = 3

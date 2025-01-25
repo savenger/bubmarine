@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://bdv2qatpoc5q7" path="res://Player/Player.tscn" id="2_vmukh"]
 [ext_resource type="PackedScene" uid="uid://3dg7467qvwkl" path="res://bubble/HostileBubble.tscn" id="3_mqvda"]
 [ext_resource type="Script" path="res://camera/camera_follow.gd" id="3_nevc8"]
-[ext_resource type="PackedScene" uid="uid://cucm5xv1e1dv5" path="res://bubble/BulletShooter.tscn" id="3_vse87"]
+[ext_resource type="PackedScene" uid="uid://cr4oyh6uulm1n" path="res://bubble/BulletShooter.tscn" id="3_vse87"]
 
 [node name="TestLevel" type="Node3D"]
 
