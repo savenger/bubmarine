@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cfgtq11r3njxm"]
+
+[ext_resource type="PackedScene" uid="uid://bho36gccn0pa8" path="res://FBX/Floor.fbx" id="1_kc20o"]
+
+[node name="Floor" type="Node3D"]
+
+[node name="Floor" parent="." instance=ExtResource("1_kc20o")]

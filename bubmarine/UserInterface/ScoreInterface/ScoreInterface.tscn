@@ -1,0 +1,70 @@
+[gd_scene load_steps=9 format=3 uid="uid://d1ldig75dmv8f"]
+
+[ext_resource type="Theme" uid="uid://d1m6om37o1rcl" path="res://UserInterface/menu_theme.tres" id="1_dsu0m"]
+[ext_resource type="Script" path="res://UserInterface/ScoreInterface/hp_bar.gd" id="2_vh63b"]
+[ext_resource type="Script" path="res://UserInterface/ScoreInterface/game_time.gd" id="3_ijrvh"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ogfka"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lj7vv"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gew1f"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cdgc7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s4ag7"]
+
+[node name="PanelContainer" type="PanelContainer"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 41.0
+grow_horizontal = 2
+size_flags_vertical = 0
+theme = ExtResource("1_dsu0m")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme = ExtResource("1_dsu0m")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="hpBar" type="ProgressBar" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 1
+theme = ExtResource("1_dsu0m")
+max_value = 1.0
+step = 0.001
+value = 1.0
+script = ExtResource("2_vh63b")
+
+[node name="Spacer" type="Control" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="GameTime" type="Label" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 16
+text = "00:00"
+script = ExtResource("3_ijrvh")
+
+[node name="Timer" type="Timer" parent="MarginContainer/HBoxContainer/GameTime"]
+autostart = true
+
+[node name="PauseButton" type="Button" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_ogfka")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_lj7vv")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_gew1f")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_cdgc7")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_s4ag7")
+text = "⏸"
+
+[connection signal="timeout" from="MarginContainer/HBoxContainer/GameTime/Timer" to="MarginContainer/HBoxContainer/GameTime" method="_on_timer_timeout"]

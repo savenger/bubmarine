@@ -1,0 +1,102 @@
+[gd_scene load_steps=6 format=3 uid="uid://bosxamqj56ehq"]
+
+[ext_resource type="Theme" uid="uid://d1m6om37o1rcl" path="res://UserInterface/menu_theme.tres" id="1_23smk"]
+[ext_resource type="Script" path="res://UserInterface/StartMenu/start_menu.gd" id="2_u26fq"]
+[ext_resource type="Script" path="res://UserInterface/StartMenu/volume_slider.gd" id="2_vsjyq"]
+[ext_resource type="Script" path="res://UserInterface/StartMenu/quit_button.gd" id="4_pu0j4"]
+[ext_resource type="PackedScene" uid="uid://cccdnswk50f2h" path="res://UserInterface/Credits/Credits.tscn" id="4_rxrfr"]
+
+[node name="StartMenu" type="Control" node_paths=PackedStringArray("ip_field")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_u26fq")
+ip_field = NodePath("StartMenu/IpContainer/LineIP")
+
+[node name="StartMenu" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -112.0
+offset_top = -261.0
+offset_right = 112.0
+offset_bottom = 261.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_23smk")
+
+[node name="StartButton" type="Button" parent="StartMenu"]
+layout_mode = 2
+theme = ExtResource("1_23smk")
+text = "Start"
+
+[node name="JoinButton" type="Button" parent="StartMenu"]
+layout_mode = 2
+theme = ExtResource("1_23smk")
+text = "Join"
+
+[node name="IpContainer" type="HBoxContainer" parent="StartMenu"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="StartMenu/IpContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+text = "IP:"
+vertical_alignment = 1
+
+[node name="LineIP" type="LineEdit" parent="StartMenu/IpContainer"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+text = "192.168.178.123"
+alignment = 2
+max_length = 15
+
+[node name="Label" type="Label" parent="StartMenu"]
+layout_mode = 2
+theme = ExtResource("1_23smk")
+text = "Volume"
+horizontal_alignment = 1
+
+[node name="VolumeSlider" type="HSlider" parent="StartMenu"]
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+value = 0.5
+script = ExtResource("2_vsjyq")
+
+[node name="CreditsButton" type="Button" parent="StartMenu"]
+layout_mode = 2
+theme = ExtResource("1_23smk")
+text = "Credits"
+
+[node name="QuitButton" type="Button" parent="StartMenu"]
+layout_mode = 2
+theme = ExtResource("1_23smk")
+text = "Quit"
+script = ExtResource("4_pu0j4")
+
+[node name="Credits" parent="." instance=ExtResource("4_rxrfr")]
+visible = false
+layout_mode = 1
+
+[node name="lblIP" type="Label" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 617.0
+offset_right = 72.0
+offset_bottom = 640.0
+text = "LocalIP: "
+
+[connection signal="pressed" from="StartMenu/StartButton" to="." method="_on_btn_host_pressed"]
+[connection signal="pressed" from="StartMenu/JoinButton" to="." method="_on_btn_join_pressed"]
+[connection signal="value_changed" from="StartMenu/VolumeSlider" to="StartMenu/VolumeSlider" method="_on_value_changed"]
+[connection signal="pressed" from="StartMenu/CreditsButton" to="Credits" method="_on_credits_button_pressed"]
+[connection signal="pressed" from="StartMenu/QuitButton" to="StartMenu/QuitButton" method="_on_quit_button_pressed"]
