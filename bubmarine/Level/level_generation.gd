@@ -19,7 +19,7 @@ var arcs = [
 ]
 
 var collectables = [
-	preload("res://Level/bubble.tscn")
+	preload("res://bubble/bubble.tscn")
 ]
 
 # Called when the node enters the scene tree for the first time.
@@ -64,7 +64,7 @@ func get_random_tile(create_collectable: bool):
 				f.add_child(rock)
 				rock.transform.origin.x = x * LevelData.ROCK_SIZE
 				rock.transform.origin.z = y * LevelData.ROCK_SIZE
-				print("generated rock at %s, %s" % [str(rock.transform.origin.x), str(rock.transform.origin.z)])
+				#print("generated rock at %s, %s" % [str(rock.transform.origin.x), str(rock.transform.origin.z)])
 				if not grid.has(rock.transform.origin.x):
 					grid[rock.transform.origin.x] = []
 				grid[rock.transform.origin.x].append(rock.transform.origin.z)
@@ -85,7 +85,7 @@ func get_random_tile(create_collectable: bool):
 			if (arc_start) in grid.keys() and (arc_end) in grid.keys():
 				arc_possible = (y in grid[arc_start]) and (y in grid[arc_end]) and (arc_mid not in grid[x])
 			if arc_possible: #randf() < 0.5:
-				print("setting arc from %s,%s to %s,%s" % [arc_start, y, arc_end, y])
+				# print("setting arc from %s,%s to %s,%s" % [arc_start, y, arc_end, y])
 				var arc = generate_arc()
 				f.add_child(arc)
 				arc.transform.origin.x = arc_mid
@@ -93,7 +93,7 @@ func get_random_tile(create_collectable: bool):
 	return f
 
 func generate_tiles(position: Vector2):
-	print("have go generate tile in %s, %s and around" % [str(position.x), str(position.y)])
+	# print("have go generate tile in %s, %s and around" % [str(position.x), str(position.y)])
 	if not tiles_present_in_chunk(position):
 		generate_tiles_in_chunk(position)
 	for i in range(3):
@@ -120,7 +120,7 @@ func generate_tiles_in_chunk(chunk_position):
 			#if x == 0 and z == 0:
 			#	print("that is: %s, %s" % [str(t.global_transform.origin.x), str(t.global_transform.origin.z)])
 			LevelData.tile_count += 1
-			print("generated %s th tile at %s, %s" % [str(LevelData.tile_count), str(t.global_transform.origin.x), str(t.global_transform.origin.z)])
+			# print("generated %s th tile at %s, %s" % [str(LevelData.tile_count), str(t.global_transform.origin.x), str(t.global_transform.origin.z)])
 	# place tree between two random tiles
 	var rx = rng.randi() % LevelData.CHUNK_SIZE
 	var rz = rng.randi() % LevelData.CHUNK_SIZE
