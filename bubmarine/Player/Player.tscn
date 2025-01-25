@@ -18,4 +18,3 @@ script = ExtResource("1_rmy15")
 replication_config = SubResource("SceneReplicationConfig_hi2mw")
 
 [node name="Submarine" parent="." instance=ExtResource("2_y61dx")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00937295, 0.0753896, 0.0375934)
