@@ -15,12 +15,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_u26fq")
+start_level = null
 ip_field = NodePath("StartMenu/IpContainer/LineIP")
-
-[node name="ScoreInterface" parent="." node_paths=PackedStringArray("pause_menu") groups=["PauseMenu"] instance=ExtResource("6_vxgfb")]
-layout_mode = 1
-offset_bottom = 66.0
-pause_menu = NodePath("../StartMenu")
 
 [node name="StartMenu" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -36,10 +32,6 @@ offset_bottom = 261.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_23smk")
-
-[node name="Control" type="Control" parent="StartMenu" groups=["PauseMenu"]]
-custom_minimum_size = Vector2(0, 50)
-layout_mode = 2
 
 [node name="StartButton" type="Button" parent="StartMenu" groups=["MainMenu"]]
 layout_mode = 2
@@ -103,9 +95,14 @@ theme = ExtResource("1_23smk")
 text = "Quit"
 script = ExtResource("4_pu0j4")
 
-[node name="Credits" parent="." instance=ExtResource("4_rxrfr")]
+[node name="Credits" parent="." groups=["PauseMenu"] instance=ExtResource("4_rxrfr")]
 visible = false
 layout_mode = 1
+
+[node name="ScoreInterface" parent="." node_paths=PackedStringArray("pause_menu") instance=ExtResource("6_vxgfb")]
+layout_mode = 1
+offset_bottom = 49.0
+pause_menu = NodePath("../StartMenu")
 
 [node name="lblIP" type="Label" parent="."]
 layout_mode = 0
@@ -121,4 +118,3 @@ text = "LocalIP: "
 [connection signal="value_changed" from="StartMenu/VolumeSlider" to="StartMenu/VolumeSlider" method="_on_value_changed"]
 [connection signal="pressed" from="StartMenu/BackToMenuButton" to="." method="_on_back_to_menu_button_pressed"]
 [connection signal="pressed" from="StartMenu/CreditsButton" to="Credits" method="_on_credits_button_pressed"]
-[connection signal="pressed" from="StartMenu/QuitButton" to="StartMenu/QuitButton" method="_on_quit_button_pressed"]
