@@ -7,10 +7,12 @@
 script = ExtResource("1_2q2x8")
 
 [node name="SonarPanel" type="TextureRect" parent="."]
-offset_left = 2.0
-offset_top = 516.0
-offset_right = 130.0
-offset_bottom = 647.0
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -131.0
+offset_right = 128.0
+grow_vertical = 0
 texture = ExtResource("1_mveqq")
 expand_mode = 1
 stretch_mode = 4
@@ -21,8 +23,8 @@ position = Vector2(64, 65)
 [node name="Target" type="ColorRect" parent="SonarPanel"]
 layout_mode = 0
 offset_left = 64.0
-offset_top = 64.0
-offset_right = 66.0
+offset_top = 62.0
+offset_right = 68.0
 offset_bottom = 66.0
 rotation = 0.785398
 color = Color(0.869129, 0, 0.0848827, 1)
