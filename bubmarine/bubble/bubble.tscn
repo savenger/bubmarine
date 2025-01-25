@@ -18,3 +18,12 @@ shader_parameter/noise_scale = 0.5
 [node name="Bubble" type="MeshInstance3D"]
 material_override = SubResource("ShaderMaterial_uaphi")
 mesh = SubResource("SphereMesh_qrjcx")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+light_color = Color(0.592157, 0.239216, 0.94902, 1)
+light_energy = 8.04
+light_size = 1.0
+shadow_enabled = true
+shadow_normal_bias = 10.0
+distance_fade_enabled = true
+omni_range = 48.6438
