@@ -5,6 +5,7 @@ extends RigidBody3D
 @export var torque : int = 50
 @export var hatch_controller : player_hatch
 @export var hatch_speedfactor : float
+@export var swing_force = 0.8
 var acc : float = 0.0
 
 func _enter_tree():
@@ -27,6 +28,10 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 	else:
 		acc = 0
 		
+		
+	var target_tilt_z = float(rotation_direction.y) * swing_force 
+	rotation.z = lerp(rotation.z, target_tilt_z, 0.06) 
+	rotation.x = lerp(rotation.x, 0.0, 0.2)
 		
 	state.apply_torque(rotation_direction * torque)
 	acc *= hatch_speedfactor if hatch_controller._is_open else 1
