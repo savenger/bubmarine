@@ -200,6 +200,7 @@ player = NodePath("..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.986, -0.096, -1.052)
 player = NodePath("..")
 
+[connection signal="ready" from="." to="." method="_on_ready"]
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
 
 [editable path="Submarine"]
