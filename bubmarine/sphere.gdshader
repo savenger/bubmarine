@@ -1,5 +1,4 @@
 shader_type spatial;
-render_mode diffuse_burley;
 uniform float speed = 2.0;
 uniform float size = 0.06;
 //void vertex() {
