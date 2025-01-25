@@ -17,8 +17,8 @@ config/features=PackedStringArray("4.3", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
-
 LevelData="*res://Level/level_data.gd"
+BackgroundMusic="*res://Soundtrack/BackgroundMusic.tscn"
 
 [physics]
 
