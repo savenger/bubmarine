@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://d0gug6qrolw6u"]
+
+[ext_resource type="AudioStream" uid="uid://dsfp8jx7he0on" path="res://Soundtrack/bubmarine_theme.ogg" id="1_dkscf"]
+
+[node name="BackgroundMusic" type="AudioStreamPlayer"]
+stream = ExtResource("1_dkscf")
+autoplay = true
+playback_type = 1
+parameters/looping = true
