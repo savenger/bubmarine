@@ -1,0 +1,36 @@
+[gd_scene load_steps=4 format=3 uid="uid://cccdnswk50f2h"]
+
+[ext_resource type="Script" path="res://UserInterface/Credits/credits.gd" id="1_ph6ut"]
+[ext_resource type="Theme" uid="uid://d1m6om37o1rcl" path="res://UserInterface/menu_theme.tres" id="1_wv68u"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_eleij"]
+bg_color = Color(0.103295, 0.686281, 0.667207, 1)
+
+[node name="Credits" type="PanelContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_eleij")
+script = ExtResource("1_ph6ut")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_wv68u")
+text = "Created by Team Bubmarine for GGJ at IF(Game)SH"
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="BackButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_stretch_ratio = 5.18
+theme = ExtResource("1_wv68u")
+text = "Back"
+
+[connection signal="pressed" from="VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
