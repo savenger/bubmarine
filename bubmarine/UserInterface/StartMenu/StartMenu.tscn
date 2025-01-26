@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bosxamqj56ehq"]
+[gd_scene load_steps=16 format=3 uid="uid://bosxamqj56ehq"]
 
 [ext_resource type="Theme" uid="uid://d1m6om37o1rcl" path="res://UserInterface/menu_theme.tres" id="1_23smk"]
 [ext_resource type="Script" path="res://UserInterface/StartMenu/start_menu.gd" id="2_u26fq"]
@@ -12,15 +12,16 @@
 [ext_resource type="PackedScene" uid="uid://bphkaanqdlb8e" path="res://bubble/smoke_bubble.tscn" id="10_brj2c"]
 [ext_resource type="AudioStream" uid="uid://c4yvyggcnfog1" path="res://Music/menu_theme.wav" id="11_w6tu1"]
 [ext_resource type="Shader" path="res://UserInterface/StartMenu/PostProcessOverlay.gdshader" id="12_cf5i7"]
+[ext_resource type="AudioStream" uid="uid://c87du6tnrx371" path="res://Music/noharp_loop.wav" id="12_t5pw8"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_6w1p6"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m4k5v"]
 shader = ExtResource("12_cf5i7")
 shader_parameter/size = Vector2(32, 28)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2cw8x"]
 bg_color = Color(0.239216, 0.337255, 0.458824, 1)
 
-[node name="MainMenu" type="Control" node_paths=PackedStringArray("ip_field", "game_over", "score_interface")]
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("ip_field", "game_over", "score_interface", "Bubble", "MenuMusic", "BackGroundLoopMusic")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -33,12 +34,15 @@ script = ExtResource("2_u26fq")
 ip_field = NodePath("StartMenu/IpContainer/LineIP")
 game_over = NodePath("GameOverScreen")
 score_interface = NodePath("ScoreInterface")
+Bubble = NodePath("Bubble")
+MenuMusic = NodePath("MenuMusic")
+BackGroundLoopMusic = NodePath("BackGroundLoopMusic")
 
-[node name="POstProcess" type="CanvasLayer" parent="."]
-layer = -34
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -39
 
-[node name="ColorRect" type="ColorRect" parent="POstProcess"]
-material = SubResource("ShaderMaterial_6w1p6")
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_m4k5v")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -196,9 +200,12 @@ text = "LocalIP: "
 [node name="Bubble" parent="." instance=ExtResource("10_brj2c")]
 transform = Transform3D(-0.715571, 0, 0.69854, 0, 1, 0, -0.69854, 0, -0.715571, 2.16559, 1.47215, -3.40363)
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="MenuMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11_w6tu1")
 autoplay = true
+
+[node name="BackGroundLoopMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_t5pw8")
 
 [connection signal="timeout" from="LoadingScreen/LoadTimer" to="LoadingScreen" method="_on_load_timer_timeout"]
 [connection signal="pressed" from="StartMenu/StartButton" to="." method="_on_start_button_pressed"]
