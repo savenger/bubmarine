@@ -59,7 +59,7 @@ func _process(delta: float) -> void:
 		var chunk_pos: Vector2 = pos_to_chunk_pos(local_player.global_transform.origin)
 		if chunk_pos.x != current_player_chunk_pos.x or chunk_pos.y != current_player_chunk_pos.y:
 			current_player_chunk_pos = chunk_pos
-			# $Player.set_nearest_collectable(get_nearest_collectable($Player.global_transform.origin))
+			local_player.set_nearest_collectable(get_nearest_collectable(local_player.global_transform.origin))
 			$level_generator.generate_tiles(chunk_pos)
 	
 	if Input.is_action_just_released("volume_up"):
@@ -91,20 +91,26 @@ func _on_btn_join_pressed() -> void:
 	join_game($txtJoin.text)
 
 @rpc("authority", "reliable")
-func _on_collect(player_id):
+func _on_collect(player_id, collectable_position):
 	print(player_id)
 	if not player_id in player_scores.keys():
 		player_scores[player_id] = 0
 	player_scores[player_id] += 1
 	$lblBubbles.text = str(player_scores)
 	get_nearest_collectable_delayed()
-	if player_id != multiplayer.get_unique_id():
-		_on_collect_inform.rpc(1, player_id)
+	print("find collectable: %s" % str(collectable_position))
+	var i = LevelData.collectable_locations.find(collectable_position)
+	LevelData.collectable_locations.remove_at(i)
+	get_nearest_collectable_delayed()
+	_on_collect_inform.rpc(player_id, collectable_position)
 
 @rpc("any_peer", "reliable")
-func _on_collect_inform(player_id):
-	for peer in get_tree().multiplayer.get_network_connected_peers():
-		_on_collect.rpc_id(peer, player_id)
+func _on_collect_inform(player_id, collectable_position):
+	print("got informed from player %s about %s" % [str(player_id), str(collectable_position)])
+	for peer in multiplayer.get_peers():
+		print("informing %s" % str(peer))
+		_on_collect.rpc_id(peer, player_id, collectable_position)
+	_on_collect(player_id, collectable_position)
 
 func get_nearest_collectable(player_pos: Vector3) -> Vector3:
 	var dist = 999999
