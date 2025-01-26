@@ -1,14 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://dl0imxkurplp6"]
+[gd_scene load_steps=4 format=3 uid="uid://dvmf3uwom4coi"]
 
 [ext_resource type="Script" path="res://bubble/bullet_bubble.gd" id="1_6rskl"]
-[ext_resource type="PackedScene" uid="uid://y3hkvfbojgfi" path="res://bubble/lightweight_bubble.tscn" id="1_s5fix"]
+[ext_resource type="PackedScene" path="res://bubble/lightweight_bubble.tscn" id="1_s5fix"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_2q2r0"]
 radius = 0.327797
 
 [node name="BulletBubble" type="Area3D"]
 collision_layer = 0
-collision_mask = 2
+collision_mask = 5
 script = ExtResource("1_6rskl")
 
 [node name="Bubble" parent="." instance=ExtResource("1_s5fix")]

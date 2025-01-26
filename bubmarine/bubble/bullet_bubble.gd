@@ -22,4 +22,4 @@ func _on_timer_timeout() -> void:
 func _on_body_entered(body: Node3D) -> void:
 	if body is HostileBubble:
 		body.inflate_bubble(bullet_inflation)
-		queue_free()
+	queue_free()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://nl1uiftrpq1y"]
+[gd_scene load_steps=6 format=3 uid="uid://bhtadgsa6h0tw"]
 
 [ext_resource type="Shader" path="res://sphere.gdshader" id="1_5dj0x"]
 [ext_resource type="Script" path="res://bubble/lightRoam.gd" id="2_n43i8"]
@@ -23,7 +23,8 @@ material_override = SubResource("ShaderMaterial_uaphi")
 mesh = SubResource("SphereMesh_qrjcx")
 
 [node name="BubbleCollision" type="StaticBody3D" parent="."]
-collision_layer = 3
+collision_layer = 2
+collision_mask = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="BubbleCollision"]
 shape = SubResource("SphereShape3D_6pcjo")

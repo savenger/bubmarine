@@ -1,7 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://3dg7467qvwkl"]
+[gd_scene load_steps=5 format=3 uid="uid://dxvdt4ypoxryt"]
 
 [ext_resource type="Script" path="res://bubble/hostile_bubble.gd" id="1_npqah"]
-[ext_resource type="PackedScene" uid="uid://y3hkvfbojgfi" path="res://bubble/lightweight_bubble.tscn" id="2_ax1p3"]
+[ext_resource type="PackedScene" path="res://bubble/lightweight_bubble.tscn" id="2_ax1p3"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_62we0"]
 radius = 0.65
@@ -9,8 +9,8 @@ radius = 0.65
 [sub_resource type="SphereShape3D" id="SphereShape3D_62gc7"]
 
 [node name="HostileBubble" type="RigidBody3D" node_paths=PackedStringArray("mesh", "obstacle_collision", "player_collision")]
-collision_layer = 2
-collision_mask = 2
+collision_layer = 4
+collision_mask = 5
 axis_lock_linear_y = true
 script = ExtResource("1_npqah")
 mesh = NodePath("LightweightBubble")
@@ -23,8 +23,8 @@ player_collision = NodePath("Area3D/CollisionShape3D")
 shape = SubResource("SphereShape3D_62we0")
 
 [node name="Area3D" type="Area3D" parent="."]
-collision_layer = 0
-collision_mask = 4
+collision_layer = 4
+collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 shape = SubResource("SphereShape3D_62gc7")
