@@ -8,8 +8,8 @@
 [ext_resource type="Script" path="res://UserInterface/StartMenu/quit_button.gd" id="4_pu0j4"]
 [ext_resource type="PackedScene" uid="uid://cccdnswk50f2h" path="res://UserInterface/Credits/Credits.tscn" id="4_rxrfr"]
 [ext_resource type="PackedScene" uid="uid://d1ldig75dmv8f" path="res://UserInterface/ScoreInterface/ScoreInterface.tscn" id="6_vxgfb"]
-[ext_resource type="PackedScene" uid="uid://cmngnt7byyxkr" path="res://UserInterface/ScoreInterface/GameOverScreen.tscn" id="7_dd0po"]
-[ext_resource type="PackedScene" uid="uid://bdxmy5h5vkfgk" path="res://bubble/smoke_bubble.tscn" id="10_brj2c"]
+[ext_resource type="PackedScene" uid="uid://c4uxcc0tfi6qq" path="res://UserInterface/ScoreInterface/GameOverScreen.tscn" id="7_dd0po"]
+[ext_resource type="PackedScene" path="res://bubble/smoke_bubble.tscn" id="10_brj2c"]
 [ext_resource type="AudioStream" uid="uid://c4yvyggcnfog1" path="res://Music/menu_theme.wav" id="11_w6tu1"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2cw8x"]

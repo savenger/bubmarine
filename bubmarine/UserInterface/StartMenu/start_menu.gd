@@ -40,6 +40,7 @@ func _process(delta: float) -> void:
 func reset_gamestate() -> void:
 	if game_level:
 		game_level.queue_free()
+	LevelData.reset()
 	var level = load(start_level)
 	game_level = level.instantiate()
 	game_level.set_menu(self)
@@ -76,6 +77,7 @@ func _on_timer_update_seed_timeout() -> void:
 
 
 func _start_game() -> void:
+	LevelData.reset()
 	_switch_menu_mode()
 	menu_container.visible = false
 	$LoadingScreen.start()

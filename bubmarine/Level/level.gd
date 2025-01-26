@@ -96,7 +96,6 @@ func count_as_collected(player_id, collectable_position):
 		player_scores[player_id] = 0
 	player_scores[player_id] += 1
 	$lblBubbles.text = str(player_scores)
-	get_nearest_collectable_delayed()
 	print("find collectable: %s" % str(collectable_position))
 	var i = LevelData.collectable_locations.find(collectable_position)
 	if i > -1:
