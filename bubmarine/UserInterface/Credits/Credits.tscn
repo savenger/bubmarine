@@ -85,6 +85,16 @@ text = "Additional Credits"
 text = "Michael"
 uri = ""
 
+[node name="CreditContainer5" parent="VBoxContainer" instance=ExtResource("3_u4oqm")]
+layout_mode = 2
+
+[node name="Label2" parent="VBoxContainer/CreditContainer5" index="0"]
+text = "Collision Sound"
+
+[node name="CrediteeLink" parent="VBoxContainer/CreditContainer5/VBoxContainer" index="0"]
+text = "Opening Garage Door Handle 9.wav by F.M.Audio -- https://freesound.org/s/620434/ -- License: Attribution 4.0"
+uri = ""
+
 [node name="Control2" type="Control" parent="VBoxContainer"]
 custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
@@ -106,3 +116,4 @@ text = "Back"
 [editable path="VBoxContainer/CreditContainer2"]
 [editable path="VBoxContainer/CreditContainer3"]
 [editable path="VBoxContainer/CreditContainer4"]
+[editable path="VBoxContainer/CreditContainer5"]
