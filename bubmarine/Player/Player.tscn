@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Player/player.gd" id="1_rmy15"]
 [ext_resource type="PackedScene" uid="uid://u10pdfqs1ig0" path="res://FBX/Submarine.fbx" id="2_y61dx"]
 [ext_resource type="Script" path="res://Player/player_hatch.gd" id="3_nsoj8"]
-[ext_resource type="PackedScene" uid="uid://c8j5kevm8s442" path="res://bubble/BulletShooter.tscn" id="4_ucqq2"]
+[ext_resource type="PackedScene" path="res://bubble/BulletShooter.tscn" id="4_ucqq2"]
 [ext_resource type="Script" path="res://Player/player_collision_damage_controller.gd" id="5_x17up"]
 [ext_resource type="AudioStream" uid="uid://cnqooso6ntjjp" path="res://SFX/Collected.wav" id="6_4qnf5"]
 [ext_resource type="AudioStream" uid="uid://d0k606xufv8y" path="res://SFX/damageSubmarine1.wav" id="7_20q40"]

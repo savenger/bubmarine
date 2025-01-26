@@ -109,10 +109,11 @@ func get_random_tile(create_collectable: bool):
 				coral.transform.origin.z = y * LevelData.ROCK_SIZE
 			else:
 				if create_collectable and not created_collectable:
-					var c = generate_collectable()
+					var c = generate_collectable() as Node3D
 					f.add_child(c)
 					c.transform.origin.x = x * LevelData.ROCK_SIZE
 					c.transform.origin.z = y * LevelData.ROCK_SIZE
+					c.add_to_group("collectable", true)
 					created_collectable = true
 	for x in grid.keys():
 		for y in grid[x]:

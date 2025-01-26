@@ -69,7 +69,7 @@ func _on_area_3d_body_entered(body: Node3D) -> void:
 		body.get_parent().hide()
 		body.get_parent().queue_free()
 		audio_collect.play()
-		if is_multiplayer_authority():
+		if not is_multiplayer_authority():
 			return
 		var i = LevelData.collectable_locations.find(body.global_transform.origin)
 		LevelData.collectable_locations.remove_at(i)
