@@ -1,3 +1,4 @@
+class_name player
 extends RigidBody3D
 
 signal collected

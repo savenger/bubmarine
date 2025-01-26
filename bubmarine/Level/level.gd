@@ -1,9 +1,11 @@
+class_name level
 extends Node3D
 
 var current_player_chunk_pos: Vector2
 var local_player: Node
 var peer = ENetMultiplayerPeer.new()
 @export var player_scene: PackedScene
+@export var hostile_bubble_spawner_scene : PackedScene
 @export var proc_gen: bool
 @onready var _menu = $lblIP
 
@@ -12,6 +14,7 @@ var player_scores = {}
 var collectable = preload("res://Level/rock1.tscn")
 
 var ip_adress :String
+var players : Array[Node3D]
 
 func get_local_ip() -> String:
 	for address in IP.get_local_addresses():
@@ -101,7 +104,7 @@ func _on_collect(player_id):
 	$lblBubbles.text = str(player_scores)
 	get_nearest_collectable_delayed()
 
-func get_nearest_collectable(player_pos):
+func get_nearest_collectable(player_pos) -> Vector3:
 	var dist = 999999
 	var nearest = null
 	for vec in LevelData.collectable_locations:
@@ -120,16 +123,17 @@ func get_nearest_collectable_delayed():
 	timer.start()
 
 func _add_player(id = 1) -> void:
-	var player = player_scene.instantiate()
-	player.name = str(id)
-	call_deferred("add_child", player)
+	var _player := player_scene.instantiate() as player
+	_player.name = str(id)
+	call_deferred("add_child", _player)
 	var cam = get_node("Camera3D")
 	remove_child(cam)
-	player.add_child(cam)
+	_player.add_child(cam)
+	var spawner := hostile_bubble_spawner_scene.instantiate() as hostile_bubble_spawner
+	spawner.set_data(self, players)
+	_player.add_child(spawner)
+	players.append(_player)
 	if id == 1:
-		local_player = player
-		var bubble = preload("res://bubble/bubble.tscn").instantiate()
-		bubble.transform.origin.z -= 10
-		add_child(bubble)
-		player.connect("collected", _on_collect)
-		$Sonar.player = player
+		local_player = _player
+		_player.collected.connect(_on_collect)
+		$Sonar.player = _player
