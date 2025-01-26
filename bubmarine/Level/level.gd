@@ -126,7 +126,7 @@ func get_nearest_collectable_delayed():
 
 #@rpc("authority", "call_remote", "reliable")
 func _add_player(id: int = 1) -> void:
-  var _player := player_scene.instantiate() as player
+	var _player := player_scene.instantiate() as player
 	_player.name = str(id)
 	call_deferred("add_child", _player)
 	
@@ -134,15 +134,16 @@ func _add_player(id: int = 1) -> void:
 	spawner.set_data(self, players)
 	_player.add_child(spawner)
 	players.append(_player)
-  _player.collected.connect(_on_collect)
+	_player.collected.connect(_on_collect)
 	if id == 1:
 		local_player = _player
-		$Sonar.player = _player  
-    var cam = get_node("Camera3D")
-	  remove_child(cam)
-	  _player.add_child(cam)
-  else:
-    $level_generator.set_seed.rpc_id(id, get_seed())
+		$Sonar.player = _player
+		var cam = get_node("Camera3D")
+		remove_child(cam)
+		_player.add_child(cam)
+		process_mode = Node.PROCESS_MODE_ALWAYS
+	else:
+		$level_generator.set_seed.rpc_id(id, get_seed())
 
 
 func _on_multiplayer_spawner_spawned(node: Node) -> void:
