@@ -35,7 +35,9 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 		pass
 	else:
 		acc = 0
-		
+	
+	if linear_velocity.dot(global_basis.z) > 0:
+		rotation_direction.y*=-1
 		
 	var target_tilt_z = float(rotation_direction.y) * swing_force 
 	rotation.z = lerp(rotation.z, target_tilt_z, 0.06) 
