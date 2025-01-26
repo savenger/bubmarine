@@ -19,6 +19,7 @@ func set_score(points: String = "") -> void:
 func _on_restart_button_pressed() -> void:
 	visible = false
 	main_menu.reset_gamestate()
+	main_menu._on_start_button_pressed()
 
 
 func _on_end_run_button_pressed() -> void:

@@ -9,3 +9,4 @@ var tile_count = 0
 func reset():
 	map = {}
 	collectable_locations = []
+	tile_count = 0
