@@ -5,6 +5,7 @@ extends Node3D
 @export var cooldown: float = 0.2
 @export var bullet_inflation: float = 0.5
 @export var bullet_speed: float = 10
+@export var audio : AudioStreamPlayer3D
 
 var bullet = preload("res://bubble/BulletBubble.tscn")
 
@@ -20,6 +21,8 @@ func _process(delta: float) -> void:
 	if !is_multiplayer_authority(): return
 	if Input.is_action_pressed("shoot_guns") and can_shoot:
 		can_shoot = false
+		audio.pitch_scale = randf_range(0.35,0.6)
+		audio.play()
 		$Timer.start(cooldown)
 		var new_bullet = bullet.instantiate()
 		player.get_parent().add_child(new_bullet)

@@ -10,7 +10,7 @@ extends HSlider
 func _ready() -> void:
 	# Set Volume to 0 by default for sanity.
 	# TODO: set to saved volume
-	AudioServer.set_bus_volume_db(_bus, linear_to_db(0))
+	#AudioServer.set_bus_volume_db(_bus, linear_to_db(0))
 	value = db_to_linear(AudioServer.get_bus_volume_db(_bus))
 
 
