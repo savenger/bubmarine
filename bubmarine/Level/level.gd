@@ -136,6 +136,10 @@ func _add_player(id: int = 1) -> void:
 	var _player := player_scene.instantiate() as player
 	_player.name = str(id)
 	_player.health_changed.connect(func(health:float):
+		
+		if _player == local_player:
+			menu.score_interface.hp_bar.value = health
+		
 		if health == 0:
 			var player_id = local_player.multiplayer.get_unique_id()
 			if not player_id in player_scores.keys():

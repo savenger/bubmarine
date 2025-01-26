@@ -1,3 +1,4 @@
+class_name hp_bar
 extends ProgressBar
 
 
@@ -9,8 +10,3 @@ func _ready() -> void:
 
 func reset_score() -> void:
 	value = 1
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	value -= step

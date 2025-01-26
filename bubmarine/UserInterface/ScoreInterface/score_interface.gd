@@ -1,6 +1,8 @@
+class_name score_interface
 extends PanelContainer
 
 @export var pause_menu: VBoxContainer
+@export var hp_bar: hp_bar
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

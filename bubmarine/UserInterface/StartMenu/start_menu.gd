@@ -5,6 +5,7 @@ var peer = ENetMultiplayerPeer.new()
 @export_file("*.tscn") var start_level = "res://Level/Level.tscn"
 @export var ip_field: LineEdit
 @export var game_over : game_over_screen
+@export var score_interface : score_interface
 
 @onready var menu_container = $StartMenu
 

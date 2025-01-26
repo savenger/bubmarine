@@ -13,7 +13,7 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2cw8x"]
 bg_color = Color(0.239216, 0.337255, 0.458824, 1)
 
-[node name="MainMenu" type="Control" node_paths=PackedStringArray("ip_field", "game_over")]
+[node name="MainMenu" type="Control" node_paths=PackedStringArray("ip_field", "game_over", "score_interface")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -23,6 +23,7 @@ grow_vertical = 2
 script = ExtResource("2_u26fq")
 ip_field = NodePath("StartMenu/IpContainer/LineIP")
 game_over = NodePath("GameOverScreen")
+score_interface = NodePath("ScoreInterface")
 
 [node name="ScoreInterface" parent="." node_paths=PackedStringArray("pause_menu") groups=["PauseMenu"] instance=ExtResource("6_vxgfb")]
 layout_mode = 1
