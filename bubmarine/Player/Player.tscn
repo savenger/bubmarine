@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bdv2qatpoc5q7"]
+[gd_scene load_steps=17 format=3 uid="uid://bdv2qatpoc5q7"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_rmy15"]
 [ext_resource type="PackedScene" uid="uid://u10pdfqs1ig0" path="res://FBX/Submarine.fbx" id="2_y61dx"]
@@ -136,9 +136,14 @@ _data = {
 
 [sub_resource type="QuadMesh" id="QuadMesh_5y4yd"]
 
+[sub_resource type="CanvasTexture" id="CanvasTexture_8cu64"]
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_d2hua"]
 render_priority = 0
 shader = ExtResource("5_jslr3")
+shader_parameter/speed = 1.0
+shader_parameter/life_time = 3.0
+shader_parameter/bubble_texture = SubResource("CanvasTexture_8cu64")
 
 [node name="Player" type="RigidBody3D" node_paths=PackedStringArray("hatch_controller")]
 axis_lock_linear_y = true

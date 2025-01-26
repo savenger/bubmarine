@@ -21,6 +21,3 @@ void fragment() {
     ALBEDO = bubble_color.rgb;
     ALPHA = bubble_color.a;
 }
-
-vec3 offset = vec3(randf(), randf(), randf()) * 0.05; // случайное смещение
-VERTEX += offset;

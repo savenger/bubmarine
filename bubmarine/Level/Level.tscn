@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dr6q21wrtb6xl" path="res://bubble/hostile_bubble_spawner.tscn" id="3_5w0xk"]
 [ext_resource type="Script" path="res://camera/camera_follow.gd" id="3_jkbsj"]
 [ext_resource type="Script" path="res://Level/level_generation.gd" id="3_qjyve"]
-[ext_resource type="PackedScene" path="res://UserInterface/sonar.tscn" id="5_dljtp"]
+[ext_resource type="PackedScene" uid="uid://qvryts0wp4px" path="res://UserInterface/sonar.tscn" id="5_dljtp"]
 
 [sub_resource type="Environment" id="Environment_kwgv6"]
 
