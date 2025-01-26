@@ -1,4 +1,4 @@
-extends RigidBody3D
+class_name Player extends RigidBody3D
 
 signal collected
 
@@ -12,6 +12,7 @@ var acc : float = 0.0
 var nearest_collectable = null
 
 func _enter_tree():
+	print("setting authority to %s" % str(name.to_int()))
 	set_multiplayer_authority(name.to_int())
 
 func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
@@ -49,9 +50,9 @@ func get_nearest_collectable_delayed():
 	timer.start()
 
 func set_nearest_collectable(collectable):
-	print("neartest!!!!")
 	nearest_collectable = collectable
-	get_parent().get_node("Sonar").target = nearest_collectable
+	if nearest_collectable:
+		get_parent().get_node("Sonar").target = nearest_collectable
 
 func get_nearest_collectable():
 	set_nearest_collectable(get_parent().get_nearest_collectable(global_transform.origin))

@@ -8,8 +8,8 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	if player and target:
+func _process(_delta: float) -> void:
+	if player and target and player.nearest_collectable:
 		#print("Player: %s, Collectable: %s, target: %s" % [player.global_transform.origin, player.nearest_collectable, str(target)])
 		var dist = player.nearest_collectable - player.global_transform.origin
 		var new_pos = $SonarPanel/SonarCenter.position + Vector2(dist.x, dist.z)
