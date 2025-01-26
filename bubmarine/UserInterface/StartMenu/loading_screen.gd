@@ -14,21 +14,21 @@ func _process(delta: float) -> void:
 func start():
 	visible = true
 	$LoadLabel.text = "3"
-	$LoadTimer.start(1)
+	$LoadTimer.start(0.1)
 
 
 func _on_load_timer_timeout() -> void:
 	if $LoadLabel.text == "3":
 		$LoadLabel.text = "2"
-		$LoadTimer.start(1)
+		$LoadTimer.start(0.1)
 		return
 	if $LoadLabel.text == "2":
 		$LoadLabel.text = "1"
-		$LoadTimer.start(1)
+		$LoadTimer.start(0.1)
 		return
 	if $LoadLabel.text == "1":
 		$LoadLabel.text = "0"
-		$LoadTimer.start(0.5)
+		$LoadTimer.start(0.05)
 		return
 	if $LoadLabel.text == "0":
 		visible = false
