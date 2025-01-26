@@ -1,9 +1,11 @@
+class_name level
 extends Node3D
 
 var current_player_chunk_pos: Vector2
 var local_player: Node = null
 var peer = ENetMultiplayerPeer.new()
 @export var player_scene: PackedScene
+@export var hostile_bubble_spawner_scene : PackedScene
 @export var proc_gen: bool
 
 func get_seed():
@@ -14,6 +16,7 @@ var player_scores = {}
 var collectable = preload("res://Level/rock1.tscn")
 
 var ip_adress :String
+var players : Array[Node3D]
 
 func get_local_ip() -> String:
 	for address in IP.get_local_addresses():
@@ -103,7 +106,7 @@ func _on_collect_inform(player_id):
 	for peer in get_tree().multiplayer.get_network_connected_peers():
 		_on_collect.rpc_id(peer, player_id)
 
-func get_nearest_collectable(player_pos):
+func get_nearest_collectable(player_pos) -> Vector3:
 	var dist = 999999
 	var nearest = null
 	for vec in LevelData.collectable_locations:
@@ -123,20 +126,23 @@ func get_nearest_collectable_delayed():
 
 #@rpc("authority", "call_remote", "reliable")
 func _add_player(id: int = 1) -> void:
-	var player = player_scene.instantiate()
-	player.name = str(id)
-	call_deferred("add_child", player)
-	print("init_player: %s" % str(id))
-	player.connect("collected", _on_collect)
-	process_mode = ProcessMode.PROCESS_MODE_ALWAYS
-	if id != 1:
-		$level_generator.set_seed.rpc_id(id, get_seed())
-	else:
-		var cam = get_node("Camera3D")
-		remove_child(cam)
-		player.add_child(cam)
-		$Sonar.player = player
-		local_player = player
+  var _player := player_scene.instantiate() as player
+	_player.name = str(id)
+	call_deferred("add_child", _player)
+	
+	var spawner := hostile_bubble_spawner_scene.instantiate() as hostile_bubble_spawner
+	spawner.set_data(self, players)
+	_player.add_child(spawner)
+	players.append(_player)
+  _player.collected.connect(_on_collect)
+	if id == 1:
+		local_player = _player
+		$Sonar.player = _player  
+    var cam = get_node("Camera3D")
+	  remove_child(cam)
+	  _player.add_child(cam)
+  else:
+    $level_generator.set_seed.rpc_id(id, get_seed())
 
 
 func _on_multiplayer_spawner_spawned(node: Node) -> void:

@@ -13,9 +13,9 @@ extends RigidBody3D
 
 var current_target
 var previous_size = size
-@onready var mesh_base_size = mesh.scale
-@onready var obstacle_collision_base_size = obstacle_collision.shape.radius
-@onready var player_collision_base_size = player_collision.shape.radius
+@onready var mesh_base_size := mesh.scale
+@onready var obstacle_collision_base_size := obstacle_collision.scale
+@onready var player_collision_base_size := player_collision.scale
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -39,8 +39,8 @@ func _adjust_bubble_size() -> void:
 	if previous_size == size:
 		return
 	mesh.scale = mesh_base_size * size
-	obstacle_collision.shape.radius = obstacle_collision_base_size * size
-	player_collision.shape.radius = player_collision_base_size * size
+	obstacle_collision.scale = obstacle_collision_base_size * size
+	player_collision.scale = player_collision_base_size * size
 	
 	previous_size = size
 
