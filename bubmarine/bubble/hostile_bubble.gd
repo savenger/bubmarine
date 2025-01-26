@@ -76,3 +76,4 @@ func _on_player_contact(body: Node3D) -> void:
 func inflate_bubble(scale_amount: float = randf_range(0.0, 0.2)) -> void:
 	size += scale_amount
 	mass = size
+	

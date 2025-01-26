@@ -21,6 +21,7 @@ func _enter_tree():
 
 func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 	var rotation_direction : Vector3 = Vector3(0, 0, 0)
+	if !is_multiplayer_authority(): return
 	if Input.is_action_pressed("move_right"):
 		rotation_direction.y -= turn_speed
 	if Input.is_action_pressed("move_left"):
@@ -28,7 +29,7 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 	if Input.is_action_pressed("move_forward"):
 		acc = move_speed
 	elif Input.is_action_pressed("move_back"):
-		acc = -move_speed * 1.5
+		acc = -move_speed * 0.86
 		pass
 	else:
 		acc = 0
@@ -43,6 +44,7 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 	state.apply_force(-global_basis.z * 100 * acc)
 
 func _process(delta:float):
+	if !is_multiplayer_authority(): return
 	hatch_controller.set_open(Input.is_action_pressed("open_hatch"))
 
 func get_nearest_collectable_delayed():

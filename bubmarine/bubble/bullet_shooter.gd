@@ -17,6 +17,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	if !is_multiplayer_authority(): return
 	if Input.is_action_pressed("shoot_guns") and can_shoot:
 		can_shoot = false
 		$Timer.start(cooldown)
