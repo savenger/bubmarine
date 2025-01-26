@@ -112,11 +112,11 @@ func _on_collect_inform(player_id, collectable_position):
 		_on_collect.rpc_id(peer, player_id, collectable_position)
 	_on_collect(player_id, collectable_position)
 
-func get_nearest_collectable(player_pos) -> Vector3:
+func get_nearest_collectable(player_pos: Vector3) -> Vector3:
 	var dist = 999999
-	var nearest = Vector3(0,0,0)
+	var nearest := Vector3.INF
 	for vec in LevelData.collectable_locations:
-		var d = player_pos.distance_to(vec)
+		var d := player_pos.distance_to(vec)
 		if  d < dist:
 			nearest = vec
 			dist = d
@@ -134,6 +134,12 @@ func get_nearest_collectable_delayed():
 func _add_player(id: int = 1) -> void:
 	var _player := player_scene.instantiate() as player
 	_player.name = str(id)
+	_player.health_changed.connect(func(health:float):
+		if health == 0:
+			players.remove_at(players.find(_player))
+			if _player == local_player:
+				local_player = null
+	)
 	call_deferred("add_child", _player)
 	
 	var spawner := hostile_bubble_spawner_scene.instantiate() as hostile_bubble_spawner

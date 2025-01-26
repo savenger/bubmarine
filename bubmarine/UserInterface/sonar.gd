@@ -1,6 +1,5 @@
 extends Node3D
 
-@export var target : Vector3
 @export var player : Node3D
 
 ## A higher value causes larger movements of the dot,
@@ -13,9 +12,8 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
-	if player and target and player.nearest_collectable:
-		#print("Player: %s, Collectable: %s, target: %s" % [player.global_transform.origin, player.nearest_collectable, str(target)])
+func _process(delta: float) -> void:
+	if is_instance_valid(player) and player.nearest_collectable:
 		var dist = player.nearest_collectable - player.global_transform.origin
 		var relative_position = Vector2(dist.x, dist.z)
 		var relative_distance = min(relative_position.length() * sensitivity, $SonarPanel.size.x / 2.15)

@@ -2671,7 +2671,7 @@ axis_stretch_vertical = 1
 region_rect = Rect2(0, 0, 32, 32)
 modulate_color = Color(1, 0.741176, 0.741176, 1)
 
-[sub_resource type="Image" id="Image_28mlw"]
+[sub_resource type="Image" id="Image_kl1mr"]
 data = {
 "data": PackedByteArray("////AP///0D///9A////AP///wD///9A////QP///wD///8A////QP///0D///8A////AP///0D///9A////AP///wD///9A////QP///wD///8A////QP///0D///8A////AP///0D///9A////AP///wD///9A////QP///wD///8A////QP///0D///8A////AP///0D///9A////AP///wD///9A////QP///wD///8A////QP///0D///8A////AP///0D///9A////AP///wD///9A////QP///wD///8A////QP///0D///8A////AP///0D///9A////AA=="),
 "format": "RGBA8",
@@ -2681,7 +2681,7 @@ data = {
 }
 
 [sub_resource type="ImageTexture" id="ImageTexture_kfug2"]
-image = SubResource("Image_28mlw")
+image = SubResource("Image_kl1mr")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_621kt"]
 texture = ExtResource("3_od4dv")

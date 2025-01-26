@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://cr4oyh6uulm1n"]
+[gd_scene load_steps=2 format=3 uid="uid://c8j5kevm8s442"]
 
 [ext_resource type="Script" path="res://bubble/bullet_shooter.gd" id="1_tl31j"]
 
