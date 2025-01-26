@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bosxamqj56ehq"]
+[gd_scene load_steps=13 format=3 uid="uid://bosxamqj56ehq"]
 
 [ext_resource type="Theme" uid="uid://d1m6om37o1rcl" path="res://UserInterface/menu_theme.tres" id="1_23smk"]
 [ext_resource type="Script" path="res://UserInterface/StartMenu/start_menu.gd" id="2_u26fq"]
@@ -8,7 +8,9 @@
 [ext_resource type="Script" path="res://UserInterface/StartMenu/quit_button.gd" id="4_pu0j4"]
 [ext_resource type="PackedScene" uid="uid://cccdnswk50f2h" path="res://UserInterface/Credits/Credits.tscn" id="4_rxrfr"]
 [ext_resource type="PackedScene" uid="uid://d1ldig75dmv8f" path="res://UserInterface/ScoreInterface/ScoreInterface.tscn" id="6_vxgfb"]
-[ext_resource type="PackedScene" path="res://UserInterface/ScoreInterface/GameOverScreen.tscn" id="7_dd0po"]
+[ext_resource type="PackedScene" uid="uid://cmngnt7byyxkr" path="res://UserInterface/ScoreInterface/GameOverScreen.tscn" id="7_dd0po"]
+[ext_resource type="PackedScene" uid="uid://bdxmy5h5vkfgk" path="res://bubble/smoke_bubble.tscn" id="10_brj2c"]
+[ext_resource type="AudioStream" uid="uid://c4yvyggcnfog1" path="res://Music/menu_theme.wav" id="11_w6tu1"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2cw8x"]
 bg_color = Color(0.239216, 0.337255, 0.458824, 1)
@@ -18,6 +20,8 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = 1.0
+offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_u26fq")
@@ -31,7 +35,7 @@ offset_bottom = 66.0
 pause_menu = NodePath("../StartMenu")
 
 [node name="BackgroundIdle" parent="." groups=["MainMenu"] instance=ExtResource("3_5gp5p")]
-visible = false
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.28174, 0, 0)
 
 [node name="StartMenuPanel" type="Panel" parent="."]
 visible = false
@@ -172,6 +176,13 @@ offset_top = 617.0
 offset_right = 72.0
 offset_bottom = 640.0
 text = "LocalIP: "
+
+[node name="Bubble" parent="." instance=ExtResource("10_brj2c")]
+transform = Transform3D(-0.715571, 0, 0.69854, 0, 1, 0, -0.69854, 0, -0.715571, 2.16559, 1.47215, -3.40363)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_w6tu1")
+autoplay = true
 
 [connection signal="timeout" from="LoadingScreen/LoadTimer" to="LoadingScreen" method="_on_load_timer_timeout"]
 [connection signal="pressed" from="StartMenu/StartButton" to="." method="_on_start_button_pressed"]
