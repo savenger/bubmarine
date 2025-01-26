@@ -1,12 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://dr6q21wrtb6xl"]
+[gd_scene load_steps=3 format=3 uid="uid://h7f476ey0wi2"]
 
 [ext_resource type="Script" path="res://bubble/hostile_bubble_spawner.gd" id="1_io4dx"]
-[ext_resource type="PackedScene" uid="uid://3dg7467qvwkl" path="res://bubble/HostileBubble.tscn" id="2_u2ixt"]
+[ext_resource type="PackedScene" uid="uid://dxvdt4ypoxryt" path="res://bubble/HostileBubble.tscn" id="2_u2ixt"]
 
 [node name="hostile_bubble_spawner" type="Node3D"]
 script = ExtResource("1_io4dx")
-range_min = 5.0
-range_max = 20.0
-spawn_delay = 2.0
+range_min = 10.0
+range_max = 22.0
+spawn_delay = 4.3
 hostile_bubble = ExtResource("2_u2ixt")
 max_bubbles = 13
+burst_spawn_count = 2

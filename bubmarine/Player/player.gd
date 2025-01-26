@@ -2,17 +2,21 @@ class_name player
 extends RigidBody3D
 
 signal collected
+signal health_changed(health:float)
 
-@export var move_speed = 1.0
-@export var turn_speed = 0.3
+@export var move_speed := 1.0
+@export var turn_speed := 0.3
 @export var torque : int = 50
 @export var hatch_controller : player_hatch
 @export var hatch_speedfactor : float
-@export var swing_force = 0.8
+@export var swing_force := 0.8
+@export var health := 1.0
+
 var acc : float = 0.0
 var nearest_collectable = null
 
 func _enter_tree():
+	print("setting authority to %s" % str(name.to_int()))
 	set_multiplayer_authority(name.to_int())
 
 func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
@@ -50,9 +54,7 @@ func get_nearest_collectable_delayed():
 	timer.start()
 
 func set_nearest_collectable(collectable):
-	print("neartest!!!!")
 	nearest_collectable = collectable
-	get_parent().get_node("Sonar").target = nearest_collectable
 
 func get_nearest_collectable():
 	set_nearest_collectable(get_parent().get_nearest_collectable(global_transform.origin))
@@ -66,6 +68,16 @@ func _on_area_3d_body_entered(body: Node3D) -> void:
 		emit_signal("collected", multiplayer.get_unique_id())
 		get_nearest_collectable_delayed()
 
-
 func _on_ready() -> void:
 	get_nearest_collectable_delayed()
+
+func change_health_state(delta : float):
+	var final_health := clampf(health + delta, 0, 1)
+	if final_health == health: return
+	health = final_health
+	print("me health "+str(health))
+	health_changed.emit(health)
+
+	if health == 0:
+		self.queue_free()
+	

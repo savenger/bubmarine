@@ -2,8 +2,9 @@ class_name HostileBubble
 extends RigidBody3D
 
 @export var pathfinding_targets: Array[Node3D]
-@export var movement_speed: float = 2
-@export var pop_size: float = 2.0
+@export var movement_acceleration: float = 2
+@export var pop_size: float = 5.0
+@export var inflicted_health_change: float = -0.2
 
 @export_group("BubbleSize")
 @export var size: float = 1.0
@@ -23,7 +24,7 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	_move_towards_target()
 	_adjust_bubble_size()
 	_pop_bubble()
@@ -50,8 +51,7 @@ func _move_towards_target() -> void:
 		return
 		
 	var direction = global_position.direction_to(current_target.global_position)
-	linear_velocity = direction * movement_speed
-
+	apply_central_force(movement_acceleration * direction)
 
 func _find_closest_target() -> Node3D:
 	var closest_target = null
@@ -68,7 +68,11 @@ func _find_closest_target() -> Node3D:
 func _on_player_contact(body: Node3D) -> void:
 	visible = false
 	queue_free()
-
+	
+	var p := body as player
+	if(p!=null):
+		p.change_health_state(inflicted_health_change)
 
 func inflate_bubble(scale_amount: float = randf_range(0.0, 0.2)) -> void:
 	size += scale_amount
+	mass = size
