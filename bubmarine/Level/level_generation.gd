@@ -32,25 +32,45 @@ var collectables = [
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	rng.randomize()
+	pass
 
+func init_rng(new_seed = 0):
+	if new_seed == 0:
+		rng.randomize()
+		print("set new seed: %s" % rng.seed)
+		print("set new seed: %s" % rng.seed)
+		print("set new seed: %s" % rng.seed)
+	else:
+		rng.seed = new_seed
+		print("set server seed: %s" % rng.seed)
+	return rng.seed
+
+@rpc("any_peer")
+func get_seed():
+	return rng.seed
+
+@rpc("authority", "call_remote", "reliable")
+func set_seed(new_seed: int):
+	print("Got seed from server: %s" % str(new_seed))
+	rng.seed = new_seed
+	get_parent().process_mode = Node.PROCESS_MODE_ALWAYS
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
 
 func generate_arc():
-	var a : Node3D = arcs[randi() % len(arcs)].instantiate()
+	var a : Node3D = arcs[rng.randi() % len(arcs)].instantiate()
 	return a
 
 func generate_coral():
-	var c : Node3D = corals[randi() % len(corals)].instantiate()
-	c.rotate_y(randf())
+	var c : Node3D = corals[rng.randi() % len(corals)].instantiate()
+	c.rotate_y(rng.randf())
 	return c
 
 func generate_rock():
-	var r : Node3D = rocks[randi() % len(rocks)].instantiate()
-	r.rotate_y(randf())
+	var r : Node3D = rocks[rng.randi() % len(rocks)].instantiate()
+	r.rotate_y(rng.randf())
 	return r
 
 func tiles_present_in_chunk(chunk_position):
@@ -61,17 +81,18 @@ func tiles_present_in_chunk(chunk_position):
 	return false
 
 func generate_collectable():
-	var c = collectables[randi() % len(collectables)].instantiate()
+	var c = collectables[rng.randi() % len(collectables)].instantiate()
 	return c
 
+@rpc
 func get_random_tile(create_collectable: bool):
 	var grid = Dictionary()
 	var created_collectable = false
-	var r = rng.randf_range(0, 10.0)
+	#var r = rng.randf_range(0, 10.0)
 	var f = floor.instantiate()
-	for x in range(LevelData.TILE_SIZE / LevelData.ROCK_SIZE):
-		for y in range(LevelData.TILE_SIZE / LevelData.ROCK_SIZE):
-			if randf() < 0.1:
+	for x in range(int(LevelData.TILE_SIZE / LevelData.ROCK_SIZE)):
+		for y in range(int(LevelData.TILE_SIZE / LevelData.ROCK_SIZE)):
+			if rng.randf() < 0.1:
 				#print("creating rock at: " + str(x) + " and " + str(y))
 				var rock = generate_rock()
 				f.add_child(rock)
@@ -81,7 +102,7 @@ func get_random_tile(create_collectable: bool):
 				if not grid.has(rock.transform.origin.x):
 					grid[rock.transform.origin.x] = []
 				grid[rock.transform.origin.x].append(rock.transform.origin.z)
-			elif randf() < 0.2:
+			elif rng.randf() < 0.2:
 				var coral = generate_coral()
 				f.add_child(coral)
 				coral.transform.origin.x = x * LevelData.ROCK_SIZE
@@ -134,7 +155,7 @@ func generate_tiles_in_chunk(chunk_position):
 			t.global_transform.origin.z = chunk_position.y * LevelData.CHUNK_SIZE * LevelData.TILE_SIZE + z * LevelData.TILE_SIZE - LevelData.TILE_SIZE / 2
 			if create_collectable:
 				LevelData.collectable_locations.append(t.global_transform.origin)
-				print("collectable is here: x:%s, y:%s" % [str(t.global_transform.origin.x), str(t.global_transform.origin.z)])
+				# print("collectable is here: x:%s, y:%s" % [str(t.global_transform.origin.x), str(t.global_transform.origin.z)])
 			#if x == 0 and z == 0:
 			#	print("that is: %s, %s" % [str(t.global_transform.origin.x), str(t.global_transform.origin.z)])
 			LevelData.tile_count += 1

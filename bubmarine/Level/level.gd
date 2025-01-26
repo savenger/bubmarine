@@ -2,12 +2,14 @@ class_name level
 extends Node3D
 
 var current_player_chunk_pos: Vector2
-var local_player: Node
+var local_player: Node = null
 var peer = ENetMultiplayerPeer.new()
 @export var player_scene: PackedScene
 @export var hostile_bubble_spawner_scene : PackedScene
 @export var proc_gen: bool
-@onready var _menu = $lblIP
+
+func get_seed():
+	return $level_generator.rng.seed
 
 var player_scores = {}
 
@@ -27,7 +29,7 @@ func get_local_ip() -> String:
 func _ready() -> void:
 	current_player_chunk_pos.x = -1000
 	current_player_chunk_pos.y = -1000
-	$lblIP.text = "Local IP address: " + get_local_ip()
+	$lblIP.text = "Local IP address: %s, unique_id: %s, seed: %s" % [get_local_ip(), multiplayer.get_unique_id(), str($level_generator.rng.seed)]
 	print_debug(get_local_ip())
 	if proc_gen:
 		remove_child(get_node("static"))
@@ -41,27 +43,18 @@ func pause():
 	# show / hide menu
 	var new_pause_state: bool = not get_tree().paused
 	if new_pause_state:
-		$Menu.show()
+		#$Menu.show()
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	else:
-		$Menu.hide()
+		#$Menu.hide()
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	print("get_tree().paused: {paused}".format({"paused": get_tree().paused}))
 	get_tree().paused = new_pause_state
-	for c in _menu.get_children():
-		_menu.remove_child(c)
-		c.queue_free()
-	for size in range(3):
-		for c in LevelData.collectable_count[size]:
-			var cmi = collectable.instantiate()
-			cmi.found = (c in LevelData.collection[size])
-			cmi.size = size
-			cmi.sprite = c
-			print("adding bubble %s from size %s" % [str(cmi.sprite), str(cmi.size)])
-			_menu.add_child(cmi)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	# print("$level_generator.rng.seed: %s, local_player: %s" % [str($level_generator.rng.seed), str(local_player)])
+	#print("processing")
 	if local_player and proc_gen:
 		var chunk_pos: Vector2 = pos_to_chunk_pos(local_player.global_transform.origin)
 		if chunk_pos.x != current_player_chunk_pos.x or chunk_pos.y != current_player_chunk_pos.y:
@@ -84,6 +77,7 @@ func start_hosting() -> void:
 	peer.create_server(1234)
 	multiplayer.multiplayer_peer = peer
 	multiplayer.peer_connected.connect(_add_player)
+	$level_generator.init_rng()
 	_add_player()
 	
 func join_game(ip_text: String) -> void:
@@ -96,6 +90,7 @@ func _on_btn_host_pressed() -> void:
 func _on_btn_join_pressed() -> void:
 	join_game($txtJoin.text)
 
+@rpc("authority", "reliable")
 func _on_collect(player_id):
 	print(player_id)
 	if not player_id in player_scores.keys():
@@ -103,6 +98,13 @@ func _on_collect(player_id):
 	player_scores[player_id] += 1
 	$lblBubbles.text = str(player_scores)
 	get_nearest_collectable_delayed()
+	if player_id != multiplayer.get_unique_id():
+		_on_collect_inform.rpc(1, player_id)
+
+@rpc("any_peer", "reliable")
+func _on_collect_inform(player_id):
+	for peer in get_tree().multiplayer.get_network_connected_peers():
+		_on_collect.rpc_id(peer, player_id)
 
 func get_nearest_collectable(player_pos: Vector3) -> Vector3:
 	var dist = 999999
@@ -122,7 +124,8 @@ func get_nearest_collectable_delayed():
 	timer.wait_time = 2
 	timer.start()
 
-func _add_player(id = 1) -> void:
+#@rpc("authority", "call_remote", "reliable")
+func _add_player(id: int = 1) -> void:
 	var _player := player_scene.instantiate() as player
 	_player.name = str(id)
 	_player.health_changed.connect(func(health:float):
@@ -132,14 +135,27 @@ func _add_player(id = 1) -> void:
 				local_player = null
 	)
 	call_deferred("add_child", _player)
-	var cam = get_node("Camera3D")
-	remove_child(cam)
-	_player.add_child(cam)
+	
 	var spawner := hostile_bubble_spawner_scene.instantiate() as hostile_bubble_spawner
 	spawner.set_data(self, players)
 	_player.add_child(spawner)
 	players.append(_player)
+	_player.collected.connect(_on_collect)
 	if id == 1:
 		local_player = _player
-		_player.collected.connect(_on_collect)
 		$Sonar.player = _player
+		var cam = get_node("Camera3D")
+		remove_child(cam)
+		_player.add_child(cam)
+		process_mode = Node.PROCESS_MODE_ALWAYS
+	else:
+		$level_generator.set_seed.rpc_id(id, get_seed())
+
+
+func _on_multiplayer_spawner_spawned(node: Node) -> void:
+	if node.name == str(multiplayer.get_unique_id()):
+		local_player = node
+		var cam = get_node("Camera3D")
+		remove_child(cam)
+		$Sonar.player = local_player
+		local_player.add_child(cam)

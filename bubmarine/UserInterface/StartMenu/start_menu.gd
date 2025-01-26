@@ -25,7 +25,6 @@ func get_local_ip() -> String:
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	reset_gamestate()
-	$lblIP.text = "Local IP address: " + get_local_ip()
 	print_debug(get_local_ip())
 	_switch_menu_mode("MainMenu")
 	
@@ -42,6 +41,7 @@ func reset_gamestate() -> void:
 	var level = load(start_level)
 	game_level = level.instantiate()
 	add_child(game_level)
+	$lblIP.text = "Local IP address: %s, unique_id: %s, seed: %s" % [get_local_ip(), multiplayer.get_unique_id(), str(game_level.get_seed())]
 
 
 func back_to_menu() -> void:
@@ -52,10 +52,24 @@ func back_to_menu() -> void:
 func _on_start_button_pressed() -> void:
 	_start_game()
 	game_level.start_hosting()
+	$lblIP.text = "Local IP address: %s, unique_id: %s, seed: %s" % [get_local_ip(), multiplayer.get_unique_id(), str(game_level.get_seed())]
 
 
 func _on_join_button_pressed() -> void:
+	_switch_menu_mode()
 	$Level.join_game(ip_field.text)
+	menu_container.visible = false
+	
+	var timer = Timer.new()
+	add_child(timer)
+	timer.connect("timeout", Callable(self, "_on_timer_update_seed_timeout"))
+	timer.one_shot = true
+	timer.wait_time = 2
+	timer.start()
+
+func _on_timer_update_seed_timeout() -> void:
+	$lblIP.text = "Local IP address: %s, unique_id: %s, seed: %s" % [get_local_ip(), multiplayer.get_unique_id(), str(game_level.get_seed())]
+	
 
 
 func _start_game() -> void:
