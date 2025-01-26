@@ -1,0 +1,165 @@
+[gd_scene load_steps=9 format=3 uid="uid://6m5vlic7egu1"]
+
+[ext_resource type="PackedScene" uid="uid://u10pdfqs1ig0" path="res://FBX/Submarine.fbx" id="1_icdop"]
+[ext_resource type="Script" path="res://UserInterface/Background/background_idle.gd" id="1_rhoky"]
+[ext_resource type="Script" path="res://UserInterface/Background/background_hatch_controller.gd" id="2_1gtpq"]
+
+[sub_resource type="Animation" id="Animation_7lt0d"]
+resource_name = "HatchClose"
+tracks/0/type = "rotation_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Submarine/SubmarineHatchJaw")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = PackedFloat32Array(0, 1, 0.708, 0, 0, 0.706, 1, 1, -0.707, 0, 0, 0.707)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Submarine/SubmarineHatchL")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 0.707, -0.707, 0, 1, 1, 0.707, 0, 0, 0.707)
+tracks/2/type = "rotation_3d"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Submarine/SubmarineHatchR")
+tracks/2/interp = 1
+tracks/2/loop_wrap = false
+tracks/2/keys = PackedFloat32Array(0, 1, -0.001, -0.707, -0.707, 0.001, 1, 1, -0.707, 0, 0, 0.707)
+
+[sub_resource type="Animation" id="Animation_akovk"]
+resource_name = "HatchOpen"
+tracks/0/type = "rotation_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Submarine/SubmarineHatchJaw")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = PackedFloat32Array(0, 1, -0.707, 0, 0, 0.707, 1, 1, -0.707, 0, 0, -0.707)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Submarine/SubmarineHatchL")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = PackedFloat32Array(0, 1, 0.707, 0, 0, 0.707, 1, 1, 0, 0.707, -0.707, 0)
+tracks/2/type = "rotation_3d"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Submarine/SubmarineHatchR")
+tracks/2/interp = 1
+tracks/2/loop_wrap = false
+tracks/2/keys = PackedFloat32Array(0, 1, -0.707, 0, 0, 0.707, 1, 1, 0, -0.707, -0.707, 0)
+tracks/3/type = "scale_3d"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HatchCollider")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = PackedFloat32Array(0, 1, 1, 1, 1, 0.366667, 1, 1.5, 1.5, 1.5, 1, 1, 1, 1, 1)
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("HatchCollider:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.6, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, true]
+}
+
+[sub_resource type="Animation" id="Animation_x4gn7"]
+length = 0.001
+tracks/0/type = "rotation_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Submarine/SubmarineHatchJaw")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Submarine/SubmarineHatchL")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
+tracks/2/type = "rotation_3d"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Submarine/SubmarineHatchR")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1)
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("HatchCollider:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vw6ve"]
+_data = {
+"HatchClose": SubResource("Animation_7lt0d"),
+"HatchOpen": SubResource("Animation_akovk"),
+"RESET": SubResource("Animation_x4gn7")
+}
+
+[sub_resource type="Environment" id="Environment_1y3wt"]
+background_mode = 1
+background_color = Color(0.239216, 0.337255, 0.458824, 1)
+
+[node name="BackgroundIdle" type="Node3D" node_paths=PackedStringArray("camera")]
+script = ExtResource("1_rhoky")
+camera = NodePath("Camera3D")
+
+[node name="Submarine" parent="." instance=ExtResource("1_icdop")]
+transform = Transform3D(-0.815502, 0, -0.578755, 0, 1, 0, 0.578755, 0, -0.815502, -0.724455, 1.47457, -2.48094)
+
+[node name="SubmarineHatchJaw" parent="Submarine" index="1"]
+transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, -0.431413, -0.410622)
+
+[node name="SubmarineHatchL" parent="Submarine" index="2"]
+transform = Transform3D(-100, 0, 0, 0, -100, 0, 0, 0, -100, -0.645741, 0.20106, -0.653712)
+
+[node name="SubmarineHatchR" parent="Submarine" index="3"]
+transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0.645741, 0.20106, -0.653712)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.944342, 0.328965, 0, -0.328965, 0.944342, 0, 2.31803, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_vw6ve")
+}
+
+[node name="BackgroundHatchController" type="Node" parent="AnimationPlayer" node_paths=PackedStringArray("animator")]
+script = ExtResource("2_1gtpq")
+animator = NodePath("..")
+
+[node name="OpenTimer" type="Timer" parent="AnimationPlayer/BackgroundHatchController"]
+one_shot = true
+
+[node name="CloseTimer" type="Timer" parent="AnimationPlayer/BackgroundHatchController"]
+one_shot = true
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.950086, 0.167874, 0.262972, -0.311987, 0.511222, 0.800822, 0, -0.842894, 0.53808, 0.216439, 4.66711, 0)
+light_color = Color(0.458966, 0.63705, 0.920738, 1)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1y3wt")
+
+[connection signal="timeout" from="AnimationPlayer/BackgroundHatchController/OpenTimer" to="AnimationPlayer/BackgroundHatchController" method="_on_open_timer_timeout"]
+[connection signal="timeout" from="AnimationPlayer/BackgroundHatchController/CloseTimer" to="AnimationPlayer/BackgroundHatchController" method="_on_close_timer_timeout"]
+
+[editable path="Submarine"]

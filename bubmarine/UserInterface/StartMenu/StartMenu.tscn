@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://bosxamqj56ehq"]
+[gd_scene load_steps=11 format=3 uid="uid://bosxamqj56ehq"]
 
 [ext_resource type="Theme" uid="uid://d1m6om37o1rcl" path="res://UserInterface/menu_theme.tres" id="1_23smk"]
 [ext_resource type="Script" path="res://UserInterface/StartMenu/start_menu.gd" id="2_u26fq"]
 [ext_resource type="Script" path="res://UserInterface/StartMenu/volume_slider.gd" id="2_vsjyq"]
+[ext_resource type="PackedScene" uid="uid://6m5vlic7egu1" path="res://UserInterface/Background/BackgroundIdle.tscn" id="3_5gp5p"]
 [ext_resource type="Script" path="res://UserInterface/StartMenu/loading_screen.gd" id="3_br4wu"]
 [ext_resource type="Script" path="res://UserInterface/StartMenu/quit_button.gd" id="4_pu0j4"]
 [ext_resource type="PackedScene" uid="uid://cccdnswk50f2h" path="res://UserInterface/Credits/Credits.tscn" id="4_rxrfr"]
@@ -28,7 +29,11 @@ layout_mode = 1
 offset_bottom = 66.0
 pause_menu = NodePath("../StartMenu")
 
-[node name="StartMenuPanel" type="Panel" parent="." groups=["MainMenu"]]
+[node name="BackgroundIdle" parent="." groups=["MainMenu"] instance=ExtResource("3_5gp5p")]
+visible = false
+
+[node name="StartMenuPanel" type="Panel" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

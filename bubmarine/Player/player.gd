@@ -65,7 +65,7 @@ func _on_area_3d_body_entered(body: Node3D) -> void:
 		body.get_parent().queue_free()
 		var i = LevelData.collectable_locations.find(body.global_transform.origin)
 		LevelData.collectable_locations.remove_at(i)
-		emit_signal("collected", multiplayer.get_unique_id())
+		emit_signal("collected", multiplayer.get_unique_id(), body.global_transform.origin)
 		get_nearest_collectable_delayed()
 
 func _on_ready() -> void:
