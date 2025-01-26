@@ -1,7 +1,19 @@
-[gd_scene load_steps=5 format=3 uid="uid://dxvdt4ypoxryt"]
+[gd_scene load_steps=7 format=3 uid="uid://dxvdt4ypoxryt"]
 
 [ext_resource type="Script" path="res://bubble/hostile_bubble.gd" id="1_npqah"]
-[ext_resource type="PackedScene" path="res://bubble/lightweight_bubble.tscn" id="2_ax1p3"]
+[ext_resource type="PackedScene" uid="uid://bkrd1gnov8xnb" path="res://bubble/lightweight_bubble.tscn" id="2_ax1p3"]
+[ext_resource type="Shader" path="res://sphere.gdshader" id="3_6b6it"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1ysdb"]
+render_priority = 0
+shader = ExtResource("3_6b6it")
+shader_parameter/speed = 2.0
+shader_parameter/size = 0.06
+shader_parameter/outline_color = Color(1, 0.24, 0.24, 1)
+shader_parameter/target_color = Color(0.74, 0.27454, 0.1924, 1)
+shader_parameter/outline_ratio = 1.5
+shader_parameter/noise_speed = 0.2
+shader_parameter/noise_scale = 0.5
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_62we0"]
 radius = 0.65
@@ -12,12 +24,16 @@ radius = 0.65
 collision_layer = 4
 collision_mask = 5
 axis_lock_linear_y = true
+axis_lock_angular_y = true
+linear_damp = 0.8
 script = ExtResource("1_npqah")
+movement_acceleration = 3.5
 mesh = NodePath("LightweightBubble")
 obstacle_collision = NodePath("CollisionShape3D")
 player_collision = NodePath("Area3D/CollisionShape3D")
 
 [node name="LightweightBubble" parent="." instance=ExtResource("2_ax1p3")]
+material_override = SubResource("ShaderMaterial_1ysdb")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_62we0")
