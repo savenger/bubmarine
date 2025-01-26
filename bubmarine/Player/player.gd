@@ -11,6 +11,8 @@ signal health_changed(health:float)
 @export var hatch_speedfactor : float
 @export var swing_force := 0.8
 @export var health := 1.0
+@export var audio_collect : AudioStreamPlayer3D
+@export var audio_damage : AudioStreamPlayer3D
 
 var acc : float = 0.0
 var nearest_collectable = null
@@ -66,6 +68,7 @@ func _on_area_3d_body_entered(body: Node3D) -> void:
 		print("I am player %s" % (str(get_multiplayer_authority())))
 		body.get_parent().hide()
 		body.get_parent().queue_free()
+		audio_collect.play()
 		if is_multiplayer_authority():
 			return
 		var i = LevelData.collectable_locations.find(body.global_transform.origin)
@@ -80,7 +83,8 @@ func change_health_state(delta : float):
 	var final_health := clampf(health + delta, 0, 1)
 	if final_health == health: return
 	health = final_health
-	print("me health "+str(health))
+	audio_damage.pitch_scale = randf_range(audio_damage.pitch_scale/1.3,audio_damage.pitch_scale*1.3)
+	audio_damage.play()
 	health_changed.emit(health)
 
 	if health == 0:

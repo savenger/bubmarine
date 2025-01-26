@@ -11,6 +11,7 @@ extends RigidBody3D
 @export var mesh: MeshInstance3D
 @export var obstacle_collision: CollisionShape3D
 @export var player_collision: CollisionShape3D
+@export var inflate_source : AudioStreamPlayer3D
 
 var current_target
 var previous_size = size
@@ -76,4 +77,5 @@ func _on_player_contact(body: Node3D) -> void:
 func inflate_bubble(scale_amount: float = randf_range(0.0, 0.2)) -> void:
 	size += scale_amount
 	mass = size
+	inflate_source.play()
 	

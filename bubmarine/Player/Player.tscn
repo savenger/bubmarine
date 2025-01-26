@@ -1,10 +1,12 @@
-[gd_scene load_steps=14 format=3 uid="uid://bdv2qatpoc5q7"]
+[gd_scene load_steps=16 format=3 uid="uid://bdv2qatpoc5q7"]
 
 [ext_resource type="Script" path="res://Player/player.gd" id="1_rmy15"]
 [ext_resource type="PackedScene" uid="uid://u10pdfqs1ig0" path="res://FBX/Submarine.fbx" id="2_y61dx"]
 [ext_resource type="Script" path="res://Player/player_hatch.gd" id="3_nsoj8"]
-[ext_resource type="PackedScene" path="res://bubble/BulletShooter.tscn" id="4_ucqq2"]
+[ext_resource type="PackedScene" uid="uid://c8j5kevm8s442" path="res://bubble/BulletShooter.tscn" id="4_ucqq2"]
 [ext_resource type="Script" path="res://Player/player_collision_damage_controller.gd" id="5_x17up"]
+[ext_resource type="AudioStream" uid="uid://cnqooso6ntjjp" path="res://SFX/Collected.wav" id="6_4qnf5"]
+[ext_resource type="AudioStream" uid="uid://d0k606xufv8y" path="res://SFX/damageSubmarine1.wav" id="7_20q40"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_hi2mw"]
 properties/0/path = NodePath(".:position")
@@ -134,7 +136,7 @@ _data = {
 "RESET": SubResource("Animation_x4gn7")
 }
 
-[node name="Player" type="RigidBody3D" node_paths=PackedStringArray("hatch_controller")]
+[node name="Player" type="RigidBody3D" node_paths=PackedStringArray("hatch_controller", "audio_collect", "audio_damage")]
 collision_layer = 2
 collision_mask = 3
 axis_lock_linear_y = true
@@ -151,6 +153,8 @@ move_speed = 1.4
 torque = 85
 hatch_controller = NodePath("AnimationPlayer/PLayerHatchController")
 hatch_speedfactor = 0.5
+audio_collect = NodePath("Collect")
+audio_damage = NodePath("Damage")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_hi2mw")
@@ -209,6 +213,12 @@ player = NodePath("..")
 script = ExtResource("5_x17up")
 player = NodePath("..")
 health_change_per_collision = -0.06
+
+[node name="Collect" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("6_4qnf5")
+
+[node name="Damage" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("7_20q40")
 
 [connection signal="ready" from="." to="." method="_on_ready"]
 [connection signal="tree_entered" from="MultiplayerSynchronizer" to="." method="_on_multiplayer_synchronizer_tree_entered"]

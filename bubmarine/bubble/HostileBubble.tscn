@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://dxvdt4ypoxryt"]
+[gd_scene load_steps=8 format=3 uid="uid://dxvdt4ypoxryt"]
 
 [ext_resource type="Script" path="res://bubble/hostile_bubble.gd" id="1_npqah"]
 [ext_resource type="PackedScene" uid="uid://bkrd1gnov8xnb" path="res://bubble/lightweight_bubble.tscn" id="2_ax1p3"]
 [ext_resource type="Shader" path="res://sphere.gdshader" id="3_6b6it"]
+[ext_resource type="AudioStream" uid="uid://swfmx26na0l1" path="res://SFX/Hit_Hurt10.wav" id="4_f1mdb"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1ysdb"]
 render_priority = 0
@@ -20,7 +21,7 @@ radius = 0.65
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_62gc7"]
 
-[node name="HostileBubble" type="RigidBody3D" node_paths=PackedStringArray("mesh", "obstacle_collision", "player_collision")]
+[node name="HostileBubble" type="RigidBody3D" node_paths=PackedStringArray("mesh", "obstacle_collision", "player_collision", "inflate_source")]
 collision_layer = 4
 collision_mask = 5
 axis_lock_linear_y = true
@@ -32,6 +33,7 @@ inflicted_health_change = -0.13
 mesh = NodePath("LightweightBubble")
 obstacle_collision = NodePath("CollisionShape3D")
 player_collision = NodePath("Area3D/CollisionShape3D")
+inflate_source = NodePath("Inflate")
 
 [node name="LightweightBubble" parent="." instance=ExtResource("2_ax1p3")]
 material_override = SubResource("ShaderMaterial_1ysdb")
@@ -45,5 +47,9 @@ collision_mask = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 shape = SubResource("SphereShape3D_62gc7")
+
+[node name="Inflate" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_f1mdb")
+volume_db = -15.0
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_player_contact"]
