@@ -10,11 +10,11 @@ shader_parameter/speed = 2.0
 shader_parameter/size = 0.06
 shader_parameter/cell_size = 0.06
 shader_parameter/dot_Dir = Vector3(12.9898, 78.233, 37.719)
-shader_parameter/outline_color = Color(0.0157, 0.851, 0.545, 1)
+shader_parameter/outline_color = Color(0.830615, 0.810598, 0.175422, 1)
 shader_parameter/dark_color = Color(0.278431, 0.0431373, 0.482353, 0.721569)
-shader_parameter/bright_color = Color(0.592157, 0.239216, 0.94902, 1)
+shader_parameter/bright_color = Color(0, 0.968627, 1, 1)
 shader_parameter/border_color = Color(0, 0, 0, 1)
-shader_parameter/outline_ratio = 1.0
+shader_parameter/outline_ratio = 2.0
 shader_parameter/noise_speed = 0.2
 shader_parameter/noise_scale = 0.5
 
@@ -38,7 +38,7 @@ script = ExtResource("2_n43i8")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.29874, 1.64548, 0)
-light_color = Color(0.640203, 0.35612, 0.973547, 1)
+light_color = Color(0.628179, 0.717598, 0.20459, 1)
 light_energy = 15.607
 light_size = 1.0
 shadow_enabled = true
