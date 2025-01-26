@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bosxamqj56ehq"]
+[gd_scene load_steps=15 format=3 uid="uid://bosxamqj56ehq"]
 
 [ext_resource type="Theme" uid="uid://d1m6om37o1rcl" path="res://UserInterface/menu_theme.tres" id="1_23smk"]
 [ext_resource type="Script" path="res://UserInterface/StartMenu/start_menu.gd" id="2_u26fq"]
@@ -8,9 +8,14 @@
 [ext_resource type="Script" path="res://UserInterface/StartMenu/quit_button.gd" id="4_pu0j4"]
 [ext_resource type="PackedScene" uid="uid://cccdnswk50f2h" path="res://UserInterface/Credits/Credits.tscn" id="4_rxrfr"]
 [ext_resource type="PackedScene" uid="uid://d1ldig75dmv8f" path="res://UserInterface/ScoreInterface/ScoreInterface.tscn" id="6_vxgfb"]
-[ext_resource type="PackedScene" uid="uid://c4uxcc0tfi6qq" path="res://UserInterface/ScoreInterface/GameOverScreen.tscn" id="7_dd0po"]
-[ext_resource type="PackedScene" path="res://bubble/smoke_bubble.tscn" id="10_brj2c"]
+[ext_resource type="PackedScene" path="res://UserInterface/ScoreInterface/GameOverScreen.tscn" id="7_dd0po"]
+[ext_resource type="PackedScene" uid="uid://bphkaanqdlb8e" path="res://bubble/smoke_bubble.tscn" id="10_brj2c"]
 [ext_resource type="AudioStream" uid="uid://c4yvyggcnfog1" path="res://Music/menu_theme.wav" id="11_w6tu1"]
+[ext_resource type="Shader" path="res://UserInterface/StartMenu/PostProcessOverlay.gdshader" id="12_cf5i7"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6w1p6"]
+shader = ExtResource("12_cf5i7")
+shader_parameter/size = Vector2(32, 28)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2cw8x"]
 bg_color = Color(0.239216, 0.337255, 0.458824, 1)
@@ -28,6 +33,17 @@ script = ExtResource("2_u26fq")
 ip_field = NodePath("StartMenu/IpContainer/LineIP")
 game_over = NodePath("GameOverScreen")
 score_interface = NodePath("ScoreInterface")
+
+[node name="POstProcess" type="CanvasLayer" parent="."]
+layer = -34
+
+[node name="ColorRect" type="ColorRect" parent="POstProcess"]
+material = SubResource("ShaderMaterial_6w1p6")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="ScoreInterface" parent="." node_paths=PackedStringArray("pause_menu") groups=["PauseMenu"] instance=ExtResource("6_vxgfb")]
 layout_mode = 1
