@@ -219,6 +219,7 @@ stream = ExtResource("6_4qnf5")
 
 [node name="Damage" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("7_k7rao")
+volume_db = -7.5
 
 [connection signal="ready" from="." to="." method="_on_ready"]
 [connection signal="tree_entered" from="MultiplayerSynchronizer" to="." method="_on_multiplayer_synchronizer_tree_entered"]
