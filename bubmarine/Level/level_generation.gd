@@ -133,7 +133,7 @@ func get_random_tile(create_collectable: bool):
 	return f
 
 func generate_tiles(position: Vector2):
-	# print("have go generate tile in %s, %s and around" % [str(position.x), str(position.y)])
+	print("have go generate tile in %s, %s and around" % [str(position.x), str(position.y)])
 	if not tiles_present_in_chunk(position):
 		generate_tiles_in_chunk(position)
 	for i in range(3):

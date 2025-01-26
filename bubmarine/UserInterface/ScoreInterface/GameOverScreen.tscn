@@ -35,6 +35,7 @@ custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 
 [node name="RestartButton" type="Button" parent="VBoxContainer"]
+visible = false
 layout_mode = 2
 theme = ExtResource("1_1tocg")
 keep_pressed_outside = true

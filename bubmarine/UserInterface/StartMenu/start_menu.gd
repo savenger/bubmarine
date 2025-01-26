@@ -82,7 +82,7 @@ func _on_timer_update_seed_timeout() -> void:
 
 func _start_game() -> void:
 	LevelData.reset()
-	Bubble.queue_free()
+	Bubble.hide()
 	_switch_menu_mode()
 	menu_container.visible = false
 	MenuMusic.stop()
