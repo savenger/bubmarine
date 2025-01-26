@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bosxamqj56ehq"]
+[gd_scene load_steps=17 format=3 uid="uid://bosxamqj56ehq"]
 
 [ext_resource type="Theme" uid="uid://d1m6om37o1rcl" path="res://UserInterface/menu_theme.tres" id="1_23smk"]
 [ext_resource type="Script" path="res://UserInterface/StartMenu/start_menu.gd" id="2_u26fq"]
@@ -8,8 +8,9 @@
 [ext_resource type="Script" path="res://UserInterface/StartMenu/quit_button.gd" id="4_pu0j4"]
 [ext_resource type="PackedScene" uid="uid://cccdnswk50f2h" path="res://UserInterface/Credits/Credits.tscn" id="4_rxrfr"]
 [ext_resource type="PackedScene" uid="uid://d1ldig75dmv8f" path="res://UserInterface/ScoreInterface/ScoreInterface.tscn" id="6_vxgfb"]
-[ext_resource type="PackedScene" path="res://UserInterface/ScoreInterface/GameOverScreen.tscn" id="7_dd0po"]
-[ext_resource type="PackedScene" uid="uid://bphkaanqdlb8e" path="res://bubble/smoke_bubble.tscn" id="10_brj2c"]
+[ext_resource type="PackedScene" uid="uid://c4uxcc0tfi6qq" path="res://UserInterface/ScoreInterface/GameOverScreen.tscn" id="7_dd0po"]
+[ext_resource type="Texture2D" uid="uid://b748gglc7lqif" path="res://UserInterface/Assets/title.png" id="7_yrxtf"]
+[ext_resource type="PackedScene" path="res://bubble/smoke_bubble.tscn" id="10_brj2c"]
 [ext_resource type="AudioStream" uid="uid://c4yvyggcnfog1" path="res://Music/menu_theme.wav" id="11_w6tu1"]
 [ext_resource type="Shader" path="res://UserInterface/StartMenu/PostProcessOverlay.gdshader" id="12_cf5i7"]
 [ext_resource type="AudioStream" uid="uid://c87du6tnrx371" path="res://Music/noharp_loop.wav" id="12_t5pw8"]
@@ -101,18 +102,18 @@ one_shot = true
 
 [node name="StartMenu" type="VBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -112.0
-offset_top = -261.0
-offset_right = 112.0
-offset_bottom = 261.0
-grow_horizontal = 2
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -352.0
+offset_top = -100.0
+offset_right = -64.0
+offset_bottom = 24.0
+grow_horizontal = 0
 grow_vertical = 2
 theme = ExtResource("1_23smk")
+alignment = 1
 
 [node name="Control" type="Control" parent="StartMenu" groups=["PauseMenu"]]
 custom_minimum_size = Vector2(0, 50)
@@ -213,6 +214,20 @@ autoplay = true
 
 [node name="BackGroundLoopMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("12_t5pw8")
+
+[node name="Title" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -515.0
+offset_top = 117.0
+offset_right = 108.0
+offset_bottom = 246.0
+grow_horizontal = 2
+texture = ExtResource("7_yrxtf")
+expand_mode = 1
+stretch_mode = 4
 
 [connection signal="timeout" from="LoadingScreen/LoadTimer" to="LoadingScreen" method="_on_load_timer_timeout"]
 [connection signal="pressed" from="StartMenu/StartButton" to="." method="_on_start_button_pressed"]
