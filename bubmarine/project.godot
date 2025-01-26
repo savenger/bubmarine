@@ -19,7 +19,6 @@ config/icon="res://icon.svg"
 [autoload]
 
 LevelData="*res://Level/level_data.gd"
-BackgroundMusic="*res://Soundtrack/BackgroundMusic.tscn"
 
 [input]
 
