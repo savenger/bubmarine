@@ -12,6 +12,7 @@ var player_scores = {}
 var collectable = preload("res://Level/rock1.tscn")
 
 var ip_adress :String
+var players : Array[player]
 
 func get_local_ip() -> String:
 	for address in IP.get_local_addresses():
@@ -101,15 +102,14 @@ func _on_collect(player_id):
 	$lblBubbles.text = str(player_scores)
 
 func _add_player(id = 1) -> void:
-	var player = player_scene.instantiate()
-	player.name = str(id)
-	call_deferred("add_child", player)
+	var p := player_scene.instantiate() as player
+	p.name = str(id)
+	p.SetPlayers(players)
+	call_deferred("add_child", p)
 	var cam = get_node("Camera3D")
 	remove_child(cam)
-	player.add_child(cam)
+	p.add_child(cam)
+	players.append(player)
 	if id == 1:
-		local_player = player
-		var bubble = preload("res://bubble/bubble.tscn").instantiate()
-		bubble.transform.origin.z -= 10
-		add_child(bubble)
-		player.connect("collected", _on_collect)
+		local_player = p
+		p.connect("collected", _on_collect)
