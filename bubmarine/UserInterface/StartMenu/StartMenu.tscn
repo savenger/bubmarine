@@ -7,7 +7,7 @@
 [ext_resource type="Script" path="res://UserInterface/StartMenu/quit_button.gd" id="4_pu0j4"]
 [ext_resource type="PackedScene" uid="uid://cccdnswk50f2h" path="res://UserInterface/Credits/Credits.tscn" id="4_rxrfr"]
 [ext_resource type="PackedScene" uid="uid://d1ldig75dmv8f" path="res://UserInterface/ScoreInterface/ScoreInterface.tscn" id="6_vxgfb"]
-[ext_resource type="PackedScene" uid="uid://cmngnt7byyxkr" path="res://UserInterface/ScoreInterface/GameOverScreen.tscn" id="7_dd0po"]
+[ext_resource type="PackedScene" path="res://UserInterface/ScoreInterface/GameOverScreen.tscn" id="7_dd0po"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2cw8x"]
 bg_color = Color(0.239216, 0.337255, 0.458824, 1)
@@ -116,7 +116,7 @@ custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 20
-text = "192.168.178.123"
+text = "192.168.178.109"
 alignment = 2
 max_length = 15
 
