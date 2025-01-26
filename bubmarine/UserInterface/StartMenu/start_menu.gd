@@ -49,7 +49,7 @@ func reset_gamestate() -> void:
 	game_level = level.instantiate()
 	game_level.set_menu(self)
 	add_child(game_level)
-	$lblIP.text = "Local IP address: %s, unique_id: %s, seed: %s" % [get_local_ip(), multiplayer.get_unique_id(), str(game_level.get_seed())]
+	$lblIP.text = "Local IP address: %s, auth id: %s, seed: %s" % [get_local_ip(), get_multiplayer_authority(), str(game_level.get_seed())]
 
 
 func back_to_menu() -> void:
@@ -60,7 +60,7 @@ func back_to_menu() -> void:
 func _on_start_button_pressed() -> void:
 	_start_game()
 	game_level.start_hosting()
-	$lblIP.text = "Local IP address: %s, unique_id: %s, seed: %s" % [get_local_ip(), multiplayer.get_unique_id(), str(game_level.get_seed())]
+	$lblIP.text = "Local IP address: %s, auth id: %s, seed: %s" % [get_local_ip(), get_multiplayer_authority(), str(game_level.get_seed())]
 
 
 func _on_join_button_pressed() -> void:
@@ -76,7 +76,7 @@ func _on_join_button_pressed() -> void:
 	timer.start()
 
 func _on_timer_update_seed_timeout() -> void:
-	$lblIP.text = "Local IP address: %s, unique_id: %s, seed: %s" % [get_local_ip(), multiplayer.get_unique_id(), str(game_level.get_seed())]
+	$lblIP.text = "Local IP address: %s, auth id: %s, seed: %s" % [get_local_ip(), get_multiplayer_authority(), str(game_level.get_seed())]
 	
 
 

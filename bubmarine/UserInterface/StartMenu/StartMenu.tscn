@@ -174,12 +174,19 @@ layout_mode = 1
 main_menu = NodePath("..")
 
 [node name="lblIP" type="Label" parent="."]
-layout_mode = 0
-offset_left = 8.0
-offset_top = 617.0
-offset_right = 72.0
-offset_bottom = 640.0
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1144.0
+offset_top = -23.0
+grow_horizontal = 0
+grow_vertical = 0
 text = "LocalIP: "
+horizontal_alignment = 2
+vertical_alignment = 2
 
 [node name="Bubble" parent="." instance=ExtResource("10_brj2c")]
 transform = Transform3D(-0.715571, 0, 0.69854, 0, 1, 0, -0.69854, 0, -0.715571, 2.16559, 1.47215, -3.40363)
