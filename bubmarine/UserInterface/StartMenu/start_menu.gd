@@ -4,10 +4,11 @@ extends Control
 var peer = ENetMultiplayerPeer.new()
 @export_file("*.tscn") var start_level = "res://Level/Level.tscn"
 @export var ip_field: LineEdit
+@export var game_over : game_over_screen
 
 @onready var menu_container = $StartMenu
 
-var game_level: Node3D
+var game_level: level
 
 var current_menu_mode = "MainMenu"
 var replacement_menu_mode = "PauseMenu"
@@ -40,6 +41,7 @@ func reset_gamestate() -> void:
 		game_level.queue_free()
 	var level = load(start_level)
 	game_level = level.instantiate()
+	game_level.set_menu(self)
 	add_child(game_level)
 	$lblIP.text = "Local IP address: %s, unique_id: %s, seed: %s" % [get_local_ip(), multiplayer.get_unique_id(), str(game_level.get_seed())]
 

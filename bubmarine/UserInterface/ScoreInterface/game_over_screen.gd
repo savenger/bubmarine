@@ -1,3 +1,4 @@
+class_name game_over_screen
 extends PanelContainer
 
 
@@ -8,10 +9,12 @@ extends PanelContainer
 func _ready() -> void:
 	pass # Replace with function body.
 
+func show_and_set_score(points: int):
+	visible = true
+	set_score(str(points))
 
 func set_score(points: String = "") -> void:
 	score_label.text = points
-
 
 func _on_restart_button_pressed() -> void:
 	visible = false

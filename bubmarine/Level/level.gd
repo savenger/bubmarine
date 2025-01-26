@@ -4,6 +4,7 @@ extends Node3D
 var current_player_chunk_pos: Vector2
 var local_player: Node = null
 var peer = ENetMultiplayerPeer.new()
+var menu : MainMenu
 @export var player_scene: PackedScene
 @export var hostile_bubble_spawner_scene : PackedScene
 @export var proc_gen: bool
@@ -130,10 +131,13 @@ func _add_player(id: int = 1) -> void:
 	_player.name = str(id)
 	_player.health_changed.connect(func(health:float):
 		if health == 0:
+			var player_id = local_player.multiplayer.get_unique_id()
+			if not player_id in player_scores.keys():
+				player_scores[player_id] = 0
+			menu.game_over.show_and_set_score(player_scores[player_id])
 			players.remove_at(players.find(_player))
 			if _player == local_player:
-				local_player = null
-	)
+				local_player = null	)
 	call_deferred("add_child", _player)
 	
 	var spawner := hostile_bubble_spawner_scene.instantiate() as hostile_bubble_spawner
@@ -159,3 +163,6 @@ func _on_multiplayer_spawner_spawned(node: Node) -> void:
 		remove_child(cam)
 		$Sonar.player = local_player
 		local_player.add_child(cam)
+
+func set_menu(m: MainMenu):
+	menu = m
