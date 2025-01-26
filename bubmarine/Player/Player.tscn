@@ -5,7 +5,6 @@
 [ext_resource type="Script" path="res://Player/player_hatch.gd" id="3_nsoj8"]
 [ext_resource type="PackedScene" uid="uid://c8j5kevm8s442" path="res://bubble/BulletShooter.tscn" id="4_ucqq2"]
 [ext_resource type="Script" path="res://Player/player_collision_damage_controller.gd" id="5_x17up"]
-[ext_resource type="PackedScene" path="res://bubble/BulletShooter.tscn" id="4_ucqq2"]
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_hi2mw"]
 properties/0/path = NodePath(".:position")

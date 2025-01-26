@@ -28,6 +28,7 @@ axis_lock_angular_y = true
 linear_damp = 0.8
 script = ExtResource("1_npqah")
 movement_acceleration = 3.5
+inflicted_health_change = -0.15
 mesh = NodePath("LightweightBubble")
 obstacle_collision = NodePath("CollisionShape3D")
 player_collision = NodePath("Area3D/CollisionShape3D")

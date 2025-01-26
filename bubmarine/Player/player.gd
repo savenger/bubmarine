@@ -55,8 +55,6 @@ func get_nearest_collectable_delayed():
 
 func set_nearest_collectable(collectable):
 	nearest_collectable = collectable
-	if nearest_collectable:
-		get_parent().get_node("Sonar").target = nearest_collectable
 
 func get_nearest_collectable():
 	set_nearest_collectable(get_parent().get_nearest_collectable(global_transform.origin))

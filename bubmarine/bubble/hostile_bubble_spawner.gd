@@ -6,6 +6,7 @@ extends Node3D
 @export var spawn_delay : float
 @export var hostile_bubble : PackedScene
 @export var max_bubbles : int
+@export var burst_spawn_count: int
 
 var level : level
 var players : Array[Node3D]
@@ -31,14 +32,16 @@ func spawn_new_bubble():
 	if(closest_collectable == Vector3.INF) : return
 	
 	var global_direction := (closest_collectable - global_position).normalized()
-	var spawn_position := global_position + global_direction * randf_range(range_min, range_max)
-	var bubble := hostile_bubble.instantiate() as HostileBubble
-	bubble.pathfinding_targets = players
-	level.add_child(bubble)
-	bubble.global_position = spawn_position
 	
-	spawned_bubbles.append(bubble)
-	if(spawned_bubbles.size() > max_bubbles):
-		var v := spawned_bubbles[0]
-		if v != null && is_instance_valid(v) : v.queue_free()
-		spawned_bubbles.remove_at(0)
+	for i in range (burst_spawn_count):
+		var spawn_position := global_position + global_direction * randf_range(range_min, range_max)
+		var bubble := hostile_bubble.instantiate() as HostileBubble
+		bubble.pathfinding_targets = players
+		level.add_child(bubble)
+		bubble.global_position = spawn_position
+	
+		spawned_bubbles.append(bubble)
+		if(spawned_bubbles.size() > max_bubbles):
+			var v := spawned_bubbles[0]
+			if v != null && is_instance_valid(v) : v.queue_free()
+			spawned_bubbles.remove_at(0)
