@@ -90,9 +90,7 @@ func _on_btn_host_pressed() -> void:
 func _on_btn_join_pressed() -> void:
 	join_game($txtJoin.text)
 
-@rpc("authority", "reliable")
-func _on_collect(player_id, collectable_position):
-	print(player_id)
+func count_as_collected(player_id, collectable_position):
 	if not player_id in player_scores.keys():
 		player_scores[player_id] = 0
 	player_scores[player_id] += 1
@@ -100,21 +98,34 @@ func _on_collect(player_id, collectable_position):
 	get_nearest_collectable_delayed()
 	print("find collectable: %s" % str(collectable_position))
 	var i = LevelData.collectable_locations.find(collectable_position)
-	LevelData.collectable_locations.remove_at(i)
+	if i > -1:
+		LevelData.collectable_locations.remove_at(i)
 	get_nearest_collectable_delayed()
-	_on_collect_inform.rpc(player_id, collectable_position)
+
+func _on_collect(player_id, collectable_position):
+	print(player_id)
+	count_as_collected(player_id, collectable_position)
+	if player_id == 1 and multiplayer.get_unique_id() == 1:
+		_on_collect_inform(player_id, collectable_position)
+	else:
+		_on_collect_inform.rpc(player_id, collectable_position)
+
+@rpc("authority", "reliable")
+func _remote_player_collected(player_id, collectable_position):
+	count_as_collected(player_id, collectable_position)
 
 @rpc("any_peer", "reliable")
 func _on_collect_inform(player_id, collectable_position):
 	print("got informed from player %s about %s" % [str(player_id), str(collectable_position)])
 	for peer in multiplayer.get_peers():
-		print("informing %s" % str(peer))
-		_on_collect.rpc_id(peer, player_id, collectable_position)
-	_on_collect(player_id, collectable_position)
+		print("considering %s" % (str(peer)))
+		if peer != player_id:
+			print("informing %s" % str(peer))
+			_remote_player_collected.rpc_id(peer, player_id, collectable_position)
 
 func get_nearest_collectable(player_pos: Vector3) -> Vector3:
 	var dist = 999999
-	var nearest := Vector3.INF
+	var nearest := Vector3(0,0,0)
 	for vec in LevelData.collectable_locations:
 		var d := player_pos.distance_to(vec)
 		if  d < dist:
@@ -125,10 +136,13 @@ func get_nearest_collectable(player_pos: Vector3) -> Vector3:
 func get_nearest_collectable_delayed():
 	var timer = Timer.new()
 	add_child(timer)
-	timer.connect("timeout", Callable(self, "get_nearest_collectable"))
+	timer.connect("timeout", Callable(self, "get_nearest_collectable_for_local_player"))
 	timer.one_shot = true
 	timer.wait_time = 2
 	timer.start()
+
+func get_nearest_collectable_for_local_player():
+	local_player.set_nearest_collectable(get_nearest_collectable(global_transform.origin))
 
 #@rpc("authority", "call_remote", "reliable")
 func _add_player(id: int = 1) -> void:
