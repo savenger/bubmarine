@@ -10,6 +10,7 @@ signal collected
 @export var hatch_speedfactor : float
 @export var swing_force = 0.8
 var acc : float = 0.0
+var nearest_collectable = null
 
 func _enter_tree():
 	set_multiplayer_authority(name.to_int())
@@ -40,9 +41,31 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 func _process(delta:float):
 	hatch_controller.set_open(Input.is_action_pressed("open_hatch"))
 
+func get_nearest_collectable_delayed():
+	var timer = Timer.new()
+	add_child(timer)
+	timer.connect("timeout", Callable(self, "get_nearest_collectable"))
+	timer.one_shot = true
+	timer.wait_time = 2
+	timer.start()
+
+func set_nearest_collectable(collectable):
+	print("neartest!!!!")
+	nearest_collectable = collectable
+	get_parent().get_node("Sonar").target = nearest_collectable
+
+func get_nearest_collectable():
+	set_nearest_collectable(get_parent().get_nearest_collectable(global_transform.origin))
 
 func _on_area_3d_body_entered(body: Node3D) -> void:
 	if body.name == "BubbleCollision":
-		emit_signal("collected", multiplayer.get_unique_id())
 		body.get_parent().hide()
 		body.get_parent().queue_free()
+		var i = LevelData.collectable_locations.find(body.global_transform.origin)
+		LevelData.collectable_locations.remove_at(i)
+		emit_signal("collected", multiplayer.get_unique_id())
+		get_nearest_collectable_delayed()
+
+
+func _on_ready() -> void:
+	get_nearest_collectable_delayed()

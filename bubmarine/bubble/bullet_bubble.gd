@@ -1,7 +1,7 @@
 class_name BulletBubble
 extends Area3D
 
-var bullet_speed = 0.2
+var bullet_speed = 5
 var bullet_direction = Vector3(0, 0, 0)
 var bullet_inflation = 0.5
 
@@ -12,7 +12,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	global_position += bullet_direction * bullet_speed
+	global_position += bullet_direction * bullet_speed * delta
 
 
 func _on_timer_timeout() -> void:

@@ -100,6 +100,25 @@ func _on_collect(player_id):
 		player_scores[player_id] = 0
 	player_scores[player_id] += 1
 	$lblBubbles.text = str(player_scores)
+	get_nearest_collectable_delayed()
+
+func get_nearest_collectable(player_pos):
+	var dist = 999999
+	var nearest = null
+	for vec in LevelData.collectable_locations:
+		var d = player_pos.distance_to(vec)
+		if  d < dist:
+			nearest = vec
+			dist = d
+	return nearest
+
+func get_nearest_collectable_delayed():
+	var timer = Timer.new()
+	add_child(timer)
+	timer.connect("timeout", Callable(self, "get_nearest_collectable"))
+	timer.one_shot = true
+	timer.wait_time = 2
+	timer.start()
 
 func _add_player(id = 1) -> void:
 	var p := player_scene.instantiate() as player
@@ -113,3 +132,4 @@ func _add_player(id = 1) -> void:
 	if id == 1:
 		local_player = p
 		p.connect("collected", _on_collect)
+		$Sonar.player = player

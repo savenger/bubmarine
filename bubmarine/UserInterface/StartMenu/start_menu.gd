@@ -61,6 +61,7 @@ func _on_join_button_pressed() -> void:
 func _start_game() -> void:
 	_switch_menu_mode()
 	menu_container.visible = false
+	$LoadingScreen.start()
 	
 	
 func _switch_menu_mode(new_mode: String = replacement_menu_mode) -> String:
