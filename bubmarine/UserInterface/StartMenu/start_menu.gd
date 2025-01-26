@@ -53,6 +53,10 @@ func reset_gamestate() -> void:
 
 
 func back_to_menu() -> void:
+	MenuMusic.play()
+	BackGroundLoopMusic.stop()
+	$Title.show()
+	Bubble.show()
 	_switch_menu_mode("MainMenu")
 	menu_container.visible = true
 
@@ -83,6 +87,7 @@ func _on_timer_update_seed_timeout() -> void:
 func _start_game() -> void:
 	LevelData.reset()
 	Bubble.hide()
+	$Title.hide()
 	_switch_menu_mode()
 	menu_container.visible = false
 	MenuMusic.stop()
