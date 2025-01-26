@@ -3,7 +3,8 @@ extends RigidBody3D
 
 @export var pathfinding_targets: Array[Node3D]
 @export var movement_speed: float = 2
-@export var pop_size: float = 2.0
+@export var pop_size: float = 5.0
+@export var inflicted_health_change: float = -0.2
 
 @export_group("BubbleSize")
 @export var size: float = 1.0
@@ -68,7 +69,11 @@ func _find_closest_target() -> Node3D:
 func _on_player_contact(body: Node3D) -> void:
 	visible = false
 	queue_free()
-
+	
+	var p := body as player
+	if(p!=null):
+		p.change_health_state(inflicted_health_change)
 
 func inflate_bubble(scale_amount: float = randf_range(0.0, 0.2)) -> void:
 	size += scale_amount
+	mass = size
