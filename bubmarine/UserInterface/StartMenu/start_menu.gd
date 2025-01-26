@@ -6,6 +6,10 @@ var peer = ENetMultiplayerPeer.new()
 @export var ip_field: LineEdit
 @export var game_over : game_over_screen
 @export var score_interface : score_interface
+@export var Bubble : Node
+@export var MenuMusic : AudioStreamPlayer
+@export var BackGroundLoopMusic  : AudioStreamPlayer
+
 
 @onready var menu_container = $StartMenu
 
@@ -78,8 +82,11 @@ func _on_timer_update_seed_timeout() -> void:
 
 func _start_game() -> void:
 	LevelData.reset()
+	Bubble.queue_free()
 	_switch_menu_mode()
 	menu_container.visible = false
+	MenuMusic.stop()
+	BackGroundLoopMusic.play()
 	$LoadingScreen.start()
 	
 	
