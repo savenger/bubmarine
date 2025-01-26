@@ -28,7 +28,7 @@ func _enter_tree():
 
 func spawn_new_bubble():
 	var closest_collectable := level.get_nearest_collectable(global_position)
-	if(closest_collectable == null) : return
+	if(closest_collectable == Vector3.INF) : return
 	
 	var global_direction := (closest_collectable - global_position).normalized()
 	var spawn_position := global_position + global_direction * randf_range(range_min, range_max)
